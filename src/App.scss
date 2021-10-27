@@ -27,6 +27,7 @@ $beige: #DCB4A7;
 
 .heading-regular {
     font-size: 85px;
+    line-height: 1em;
 }
 
 .paragraphe {
@@ -36,7 +37,8 @@ $beige: #DCB4A7;
 
 .header-home {
     height: 100vh;
-    max-height: 850px;
+    max-height: 900px;
+    padding-bottom: 35px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -45,8 +47,11 @@ $beige: #DCB4A7;
     .layer {
         width: 100%;
         position: absolute;
+        &.full,
         &.text {
             height: 100%;
+        }
+        &.text {
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -85,9 +90,23 @@ $beige: #DCB4A7;
 }
 
 section {
+    .inner {
+        width: 100%;
+        max-width: 1240px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        > div {
+            width: 50%;
+            
+        }
+    }
     &.discover {
-        padding: 125px 10%;
+        padding: 125px 10% 25px;
+        position: relative;
         color: #fff;
+        z-index: 1;
         .heading-regular {
             max-width: 700px;
             margin: 0 auto;
@@ -99,9 +118,103 @@ section {
             margin: 35px auto 0;
             text-align: center;
         }
+        .dots {
+            .dot {
+                background-color: rgba(255, 255, 255, 0.25);
+                cursor: pointer;
+                &.active {
+                    background-color: #fff;
+                }
+            }
+        }
     }
     &.presentation {
-        height: 100vh;
         background-color: #fff;
+        padding: 250px 0 150px;
+        position: relative;
+        z-index: 1;
+        .inner {
+            .illu {
+                display: flex;
+                align-items: center;
+                position: relative;
+            }
+            .paragraphe {
+                margin-top: 1em;
+            }
+            .cta {
+                margin-top: 25px;
+            }
+            .hero {
+                width: 475px;
+                height: 700px;
+            }
+            .mini-hero {
+                width: 300px;
+                height: 420px;
+                box-shadow: 0px 25px 150px 0px rgba(0, 0, 0, 0.25);
+                position: absolute;
+                right: 100px;
+                bottom: -50px;
+            }
+            .hero,
+            .mini-hero {
+                img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                }
+            }
+        }
+        .brush {
+            width: 110%;
+            position: absolute;
+            top: -150px;
+        }
+    }
+    &.guide {
+        background-image: url('./images/guide/background.jpg');
+        background-size: 100%;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-color: #000;
+        padding: 100px 0;
+        position: relative;
+        &::before,
+        &::after {
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+        &::before {
+            content: '';
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+        &::after {
+            content: '';
+            width: 50%;
+            height: 75px;
+            background-color: #fff;
+        }
+        .inner {
+            position: relative;
+            z-index: 1;
+        }
+        .heading-regular {
+            color: #fff;
+        }
+        .paragraphe {
+            margin-top: 25px;
+            color: #fff;
+        }
+        .illu {
+            display: flex;
+            justify-content: center;
+        }
+        .cta {
+            margin-top: 25px;
+        }
     }
 }

@@ -15,7 +15,12 @@ import layer8 from './images/header/layer-8.png'
 import visit from './images/header/visit.svg'
 
 import visit1 from './images/discover/visit-01.jpg'
+import visit2 from './images/discover/visit-02.jpg'
 import visit3 from './images/discover/visit-03.jpg'
+
+import brush from './images/presentation/brush.svg'
+import presentation1 from './images/presentation/presentation-01.jpg'
+import presentation2 from './images/presentation/presentation-02.jpg'
 
 function App() {
   return (
@@ -30,7 +35,7 @@ function App() {
         <img className="layer" src={layer5} alt="Photo de Paris" />
         <img className="layer" src={layer6} alt="Photo de Paris" />
         <img className="layer" src={layer7} alt="Photo de Paris" />
-        <img className="layer" src={layer8} alt="Photo de Paris" />
+        <img className="layer full" src={layer8} alt="Photo de Paris" />
         <div className="layer text">
           <img src={visit} alt="Visit" />
           <h1 className="heading">Paris</h1>
@@ -53,16 +58,47 @@ function App() {
         <p className="paragraphe">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Urna, mauris amet, scelerisque nec velit quam eget eu volutpat. Amet duis risus odio hendrerit.</p>
         <div className="mt-12 grid grid-cols-3 grid-gap-4">
           <Box title="Montmartres" illu={visit1} />
-          <Box title="Montmartres" illu={visit1} bottom={true} />
+          <Box title="Montmartres" illu={visit2} bottom={true} />
           <Box title="Montmartres" illu={visit3} />
         </div>
-        <div className="mt-8 flex justify-center gap-3">
-          <div className="w-4 h-4 bg-white rounded-full" />
-          <div className="w-4 h-4 bg-white rounded-full" />
-          <div className="w-4 h-4 bg-white rounded-full" />
+        <div className="dots mt-8 flex justify-center gap-3">
+          <div className="dot active w-4 h-4 rounded-full" />
+          <div className="dot w-4 h-4 rounded-full" />
+          <div className="dot w-4 h-4 rounded-full" />
         </div>
       </section>
-      <section className="presentation"></section>
+      <section className="presentation">
+        <img className="brush" src={brush} alt="" />
+        <div className="inner">
+          <div className="illu">
+            <div className="hero">
+              <img src={presentation1} alt="Rue de Paris" />
+            </div>
+            <div className="mini-hero">
+              <img src={presentation2} alt="Rue de Paris" />
+            </div>
+          </div>
+          <div>
+            <h2 className="galins heading-regular">Discover the City of the Lights</h2>
+            <p className="paragraphe">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Urna, mauris amet, scelerisque nec velit quam eget eu volutpat. Amet duis risus odio hendrerit.</p>
+            <div className="cta dark">Book a <span>guide</span></div>
+          </div>
+        </div>
+      </section>
+      <section className="guide">
+        <div className="inner">
+          <div>
+            <h2 className="galins heading-regular">Discover the City of the Lights</h2>
+            <p className="paragraphe">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Urna, mauris amet, scelerisque nec velit quam eget eu volutpat. Amet duis risus odio hendrerit.</p>
+            <div className="cta dark">Book a <span>guide</span></div>
+          </div>
+          <div className="illu">
+            <div className="hero">
+              <img src={presentation1} alt="Rue de Paris" />
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }
