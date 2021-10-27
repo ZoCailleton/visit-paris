@@ -1,9 +1,13 @@
+import { useEffect } from 'react'
+
 import './App.scss';
 
 import Nav from './components/nav/Nav'
 import Loader from './components/loader/Loader'
+import Strokes from './components/strokes/Strokes'
 import Box from './components/box/Box'
 
+import leaves from './images/header/leaves.png'
 import layer1 from './images/header/layer-1.jpg'
 import layer2 from './images/header/layer-2.webp'
 import layer3 from './images/header/layer-3.png'
@@ -23,38 +27,42 @@ import presentation1 from './images/presentation/presentation-01.jpg'
 import presentation2 from './images/presentation/presentation-02.jpg'
 
 function App() {
+
   return (
     <div className="wrapper">
-      <Loader />
       <Nav />
       <header className="header-home">
-        <img className="layer" src={layer1} alt="Photo de Paris" />
-        <img className="layer" src={layer2} alt="Photo de Paris" />
-        <img className="layer" src={layer3} alt="Photo de Paris" />
-        <img className="layer" src={layer4} alt="Photo de Paris" />
-        <img className="layer" src={layer5} alt="Photo de Paris" />
-        <img className="layer" src={layer6} alt="Photo de Paris" />
-        <img className="layer" src={layer7} alt="Photo de Paris" />
-        <img className="layer full" src={layer8} alt="Photo de Paris" />
-        <div className="layer text">
-          <img src={visit} alt="Visit" />
-          <h1 className="heading">Paris</h1>
-          <div className="w-full flex justify-center gap-4">
-            <div className="cta">Learn more</div>
-            <div className="cta dark">Book a <span>guide</span></div>
+        <img className="layer leaves" src={leaves} alt="Photo de Paris" />
+        <div className="container">
+          <img className="layer" src={layer1} alt="Photo de Paris" />
+          <img  className="layer" src={layer2} alt="Photo de Paris" />
+          <img className="layer" src={layer3} alt="Photo de Paris" />
+          <img  className="layer" src={layer4} alt="Photo de Paris" />
+          <img className="layer" src={layer5} alt="Photo de Paris" />
+          <img  className="layer" src={layer6} alt="Photo de Paris" />
+          <img className="layer" src={layer7} alt="Photo de Paris" />
+          <img  className="layer full" src={layer8} alt="Photo de Paris" />
+          <div className="layer text">
+            <img src={visit} alt="Visit" />
+            <h1 className="heading">Paris</h1>
+            <div className="w-full flex justify-center gap-4">
+              <div className="cta">Learn more</div>
+              <div className="cta dark">Book a <span>guide</span></div>
+            </div>
+          </div>
+          <div className="bars flex">
+            <div className="bar" />
+            <div className="bar" />
+            <div className="bar" />
+            <div className="bar" />
+            <div className="bar" />
+            <div className="bar" />
           </div>
         </div>
-        <div className="bars flex">
-          <div className="bar" />
-          <div className="bar" />
-          <div className="bar" />
-          <div className="bar" />
-          <div className="bar" />
-          <div className="bar" />
-        </div>
       </header>
-      <section className="discover bg-black">
-        <h2 className="heading-regular galins">Discover the<br/>City of the Lights</h2>
+      <section className="discover bg-black active">
+        <Strokes />
+        <h2 className="heading-regular galins">Discover the<br/>City <span>of the</span> Lights</h2>
         <p className="paragraphe">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Urna, mauris amet, scelerisque nec velit quam eget eu volutpat. Amet duis risus odio hendrerit.</p>
         <div className="mt-12 grid grid-cols-3 grid-gap-4">
           <Box title="Montmartres" illu={visit1} />
@@ -86,6 +94,7 @@ function App() {
         </div>
       </section>
       <section className="guide">
+        <Strokes />
         <div className="inner">
           <div>
             <h2 className="galins heading-regular">Discover the City of the Lights</h2>
