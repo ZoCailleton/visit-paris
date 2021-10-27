@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import { gsap } from 'gsap'
+import { ScrollTrigger } from "gsap/ScrollTrigger"
 
 import './App.scss';
 
@@ -30,28 +31,42 @@ import presentation2 from './images/presentation/presentation-02.jpg'
 function App() {
 
   useEffect(() => {
-
-    const sections = gsap.utils.toArray('section');
-    sections.forEach((section) => {
+    
+    gsap.registerPlugin(ScrollTrigger)
+    document.querySelectorAll('section').forEach((section) => {
       gsap.from(section, {
         scrollTrigger: {
-          start: 'top bottom',
-          end: 'bottom top',
+          start: '50% bottom',
           trigger: section,
-          toggleClass: 'enable',
-          markers: true
+          toggleClass: 'visible'
         }
       });
     });
+
+    document.querySelector('.header-home').classList.add('active')
+    
+    const lines = document.querySelectorAll('span.line')
+    
+    let i=0;
+
+    for(let line of lines) {
+      const letters = line.textContent.split('')
+      line.innerHTML = ''
+      for(let letter of letters) {
+        line.innerHTML += `<span class="letter" transition-delay="${i*50}ms;">${letter}</span>`
+        i++
+      }
+    }
 
   }, [])
 
   return (
     <div className="wrapper">
       <Nav />
+      <Loader />
       <header className="header-home">
         <img className="layer leaves" src={leaves} alt="Photo de Paris" />
-        <div className="container">
+        <div className="container-layer">
           <img className="layer" src={layer1} alt="Photo de Paris" />
           <img  className="layer" src={layer2} alt="Photo de Paris" />
           <img className="layer" src={layer3} alt="Photo de Paris" />
@@ -80,7 +95,7 @@ function App() {
       </header>
       <section className="discover bg-black">
         <Strokes />
-        <h2 className="heading-regular galins">Discover the<br/>City <span>of the</span> Lights</h2>
+        <h2 className="heading-regular galins"><span className="line">Discover the</span><span className="line">City <span className="beige">of the</span> Lights</span></h2>
         <p className="paragraphe">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Urna, mauris amet, scelerisque nec velit quam eget eu volutpat. Amet duis risus odio hendrerit.</p>
         <div className="mt-12 grid grid-cols-3 grid-gap-4">
           <Box title="Montmartres" illu={visit1} />

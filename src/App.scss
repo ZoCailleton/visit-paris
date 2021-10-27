@@ -29,9 +29,20 @@ $beige: #DCB4A7;
     font-size: 85px;
     line-height: 1em;
     span {
-        color: $beige;
-        font-family: 'Playfair Display';
-        font-style: italic;
+        &.beige {
+            color: $beige;
+            font-family: 'Playfair Display';
+            font-style: italic;
+        }
+        &.line {
+            height: 1.2em;
+            display: block;
+            overflow: hidden;
+            .letter {
+                display: block;
+                transform: translateY(110%);
+            }
+        }
     }
 }
 
@@ -44,7 +55,13 @@ $beige: #DCB4A7;
 .header-home {
     position: relative;
     z-index: 3;
-    .container {
+    &.active {
+        .layer {
+            transform: translateY(0) !important;
+        }
+    }
+    .container-layer {
+        width: 100%;
         height: 100vh;
         max-height: 900px;
         display: flex;
@@ -58,9 +75,38 @@ $beige: #DCB4A7;
         height: 100%;
         object-fit: cover;
         position: absolute;
+        transition: 1s cubic-bezier(.68,.01,.25,.96);
+        &:nth-child(1) {
+            transform: translateY(600px);
+        }
+        &:nth-child(2) {
+            transform: translateY(550px);
+        }
+        &:nth-child(3) {
+            transform: translateY(500px);
+        }
+        &:nth-child(4) {
+            transform: translateY(450px);
+        }
+        &:nth-child(5) {
+            transform: translateY(400px);
+        }
+        &:nth-child(6) {
+            transform: translateY(350px);
+        }
+        &:nth-child(7) {
+            transform: translateY(300px);
+        }
+        &:nth-child(8) {
+            transform: translateY(150px);
+        }
+        &:nth-child(9) {
+            transform: translateY(50px);
+        }
         &.leaves {
             height: 115%;
             z-index: 1;
+            transform: translateY(0px);
         }
         &.full,
         &.text {
@@ -132,8 +178,8 @@ section {
             max-width: 600px;
             margin: 35px auto 0;
             text-align: center;
+            transform: translateY(50px);
             opacity: 0;
-            transition: 500ms;
         }
         .dots {
             .dot {
@@ -144,8 +190,9 @@ section {
                 }
             }
         }
-        &.active {
+        &.visible {
             .paragraphe {
+                transform: translateY(0px);
                 opacity: 1;
             }
         }
