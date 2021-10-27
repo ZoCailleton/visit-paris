@@ -1,0 +1,103 @@
+$beige: #DCB4A7;
+
+.wrapper {
+    max-width: 1440px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.cta {
+    width: 100%;
+    max-width: 180px;
+    background-color: #fff;
+    padding: 15px 0 12px;
+    font-size: 20px;
+    color: #000;
+    font-family: 'Bebas Neue';
+    text-align: center;
+    cursor: pointer;
+    &.dark {
+        background-color: #000;
+        color: #fff;
+        span {
+            color: $beige;
+        }
+    }
+}
+
+.heading-regular {
+    font-size: 85px;
+}
+
+.paragraphe {
+    font-size: 18px;
+    line-height: 1.75em;
+}
+
+.header-home {
+    height: 100vh;
+    max-height: 875px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    .layer {
+        width: 100%;
+        position: absolute;
+        &.text {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+    }
+    .heading {
+        margin-top: -40px;
+        font-size: 300px;
+        color: #fff;
+        font-family: 'Bebas Neue';
+        line-height: 1em;
+    }
+    .bars {
+        width: calc(6*255px);
+        align-items: flex-end;
+        position: absolute;
+        bottom: 0;
+        .bar {
+            width: 255px;
+            background-color: #000;
+            &:nth-child(1) {
+                height: 60px;
+            }
+            &:nth-child(3) {
+                height: 30px;
+            }
+            &:nth-child(5) {
+                height: 40px;
+            }
+            &:nth-child(6) {
+                height: 60px;
+            }
+        }
+    }
+}
+
+section {
+    &.discover {
+        padding: 125px 10%;
+        color: #fff;
+        .heading-regular {
+            max-width: 700px;
+            margin: 0 auto;
+            text-align: center;
+            line-height: 1em;
+        }
+        .paragraphe {
+            max-width: 600px;
+            margin: 35px auto 0;
+            text-align: center;
+        }
+    }
+}

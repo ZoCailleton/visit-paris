@@ -1,0 +1,25 @@
+.main-nav {
+    width: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: #fff;
+    font-family: 'Bebas Neue';
+    z-index: 1;
+    .inner {
+        width: 100%;
+        max-width: 1440px;
+        padding: 15px 25px;
+        border-bottom: 1px solid #ccc;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .logo {
+            font-size: 35px;
+        }
+        .items {
+            grid-gap: 15px;
+            font-size: 22px;
+        }
+    }
+}

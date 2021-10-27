@@ -1,0 +1,35 @@
+.box-discover {
+    width: 350px;
+    &.bottom {
+        margin-top: 35px;
+    }
+    .illu {
+        height: 350px;
+        background-color: #222;
+        border-radius: 5px;
+        overflow: hidden;
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+    .heading {
+        margin-top: 15px;
+        font-size: 32px;
+        font-family: 'Bebas Neue';
+    }
+    .face {
+        width: 40px;
+        height: 40px;
+        background-color: #eee;
+        margin-left: -15px;
+        border-radius: 50%;
+        overflow: hidden;
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+}
