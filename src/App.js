@@ -56,7 +56,13 @@ function App() {
           <Box title="Montmartres" illu={visit1} bottom={true} />
           <Box title="Montmartres" illu={visit3} />
         </div>
+        <div className="mt-8 flex justify-center gap-3">
+          <div className="w-4 h-4 bg-white rounded-full" />
+          <div className="w-4 h-4 bg-white rounded-full" />
+          <div className="w-4 h-4 bg-white rounded-full" />
+        </div>
       </section>
+      <section className="presentation"></section>
     </div>
   );
 }

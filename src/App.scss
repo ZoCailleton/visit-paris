@@ -36,7 +36,7 @@ $beige: #DCB4A7;
 
 .header-home {
     height: 100vh;
-    max-height: 875px;
+    max-height: 850px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -99,5 +99,9 @@ section {
             margin: 35px auto 0;
             text-align: center;
         }
+    }
+    &.presentation {
+        height: 100vh;
+        background-color: #fff;
     }
 }

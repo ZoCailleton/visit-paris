@@ -4,7 +4,7 @@ const Nav = () => {
     return (
         <nav className="main-nav">
             <div className="inner">
-                <p className="logo galins">Logo</p>
+                <p className="logo galins">Flights</p>
                 <div className="flex items">
                     <div>How we work</div>
                     <div>Pricing</div>
