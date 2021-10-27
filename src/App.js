@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+import { gsap } from 'gsap'
 
 import './App.scss';
 
@@ -27,6 +28,23 @@ import presentation1 from './images/presentation/presentation-01.jpg'
 import presentation2 from './images/presentation/presentation-02.jpg'
 
 function App() {
+
+  useEffect(() => {
+
+    const sections = gsap.utils.toArray('section');
+    sections.forEach((section) => {
+      gsap.from(section, {
+        scrollTrigger: {
+          start: 'top bottom',
+          end: 'bottom top',
+          trigger: section,
+          toggleClass: 'enable',
+          markers: true
+        }
+      });
+    });
+
+  }, [])
 
   return (
     <div className="wrapper">
@@ -60,7 +78,7 @@ function App() {
           </div>
         </div>
       </header>
-      <section className="discover bg-black active">
+      <section className="discover bg-black">
         <Strokes />
         <h2 className="heading-regular galins">Discover the<br/>City <span>of the</span> Lights</h2>
         <p className="paragraphe">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Urna, mauris amet, scelerisque nec velit quam eget eu volutpat. Amet duis risus odio hendrerit.</p>
