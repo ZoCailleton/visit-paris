@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { ScrollToPlugin } from 'gsap/ScrollToPlugin'
 
 import './App.scss';
 
@@ -28,47 +29,99 @@ import brush from './images/presentation/brush.svg'
 import presentation1 from './images/presentation/presentation-01.jpg'
 import presentation2 from './images/presentation/presentation-02.jpg'
 
-function App() {
+import guide from './images/guide/guide.jpg'
 
-  const [step, setStep] = useState(1)
+import circleBlack from './images/presentation/paris-with-locals-black.svg'
+import circleWhite from './images/presentation/paris-with-locals-white.svg'
+
+function App() {
+    
+  gsap.registerPlugin(ScrollTrigger)
+  gsap.registerPlugin(ScrollToPlugin)
+
+  const [step, setStep] = useState(4)
 
   const sectionHeader = useRef(null)
   const sectionDiscover = useRef(null)
   const sectionPresentation = useRef(null)
   const sectionGuide = useRef(null)
 
-  const handlePrev = () => step > 0 && setStep(step - 1)
-  const handleNext = () => step < 3 && setStep(step + 1)
+  const handlePrev = () => step > 0 ? setStep(step - 1) : setStep(4)
+  const handleNext = () => step < 3 ? setStep(step + 1) : setStep(0)
 
   useEffect(() => {
 
-    console.log(step)
-
     if(step === 0) {
-      sectionHeader.current.scrollIntoView()
+      gsap.to(window, {duration: 1.5, scrollTo: "#header", ease: "power2"});
     } else if(step === 1) {
-      sectionDiscover.current.scrollIntoView()
+      gsap.to(window, {duration: 1.5, scrollTo: "#discover", ease: "power2"});
     } else if(step === 2) {
-      sectionPresentation.current.scrollIntoView()
+      gsap.to(window, {duration: 1.5, scrollTo: "#presentation", ease: "power2"});
     } else if(step === 3) {
-      sectionGuide.current.scrollIntoView()
+      gsap.to(window, {duration: 1.5, scrollTo: "#guide", ease: "power2"});
     }
 
   }, [step])
 
   useEffect(() => {
-    
-    gsap.registerPlugin(ScrollTrigger)
+
+    // Sections
     document.querySelectorAll('section').forEach((section) => {
       gsap.from(section, {
         scrollTrigger: {
-          start: 'top 50%',
+          start: 'top 30%',
           trigger: section,
           toggleClass: 'visible',
-          markers: true
         }
       });
     });
+
+    // Header
+    let i=0;
+    for(let layer of document.querySelectorAll('.header-home .container-layer .layer')) {
+      i++
+      gsap.to(layer, {
+        top: 400-(i*50),
+        scrollTrigger: {
+          trigger: '.header-home',
+          start: 'top top',
+          end: '115%',
+          scrub: true
+        }
+      });
+    }
+
+    const posLetters = {
+      1: 200,
+      2: 100,
+      3: 150,
+      4: 100,
+      5: 200
+    }
+
+    i=0
+    for(let letter of document.querySelectorAll('.header-home .heading .letter')) {
+      gsap.to(letter, {
+        y: posLetters[i],
+        scrollTrigger: {
+          trigger: '.header-home',
+          start: 'top top',
+          end: '100%',
+          scrub: true
+        }
+      })
+    }
+
+    for(let circle of document.querySelectorAll('.circle')) {
+      gsap.to(circle, {
+        rotate: 360,
+        scrollTrigger: {
+          trigger: '.presentation',
+          start: 'top bottom',
+          scrub: true
+        }
+      })
+    }
 
     document.querySelector('.header-home').classList.add('active')
 
@@ -76,16 +129,24 @@ function App() {
     
     const headings = document.querySelectorAll('.heading-regular.animated')
 
+    let j=1;
     for(let heading of headings) {
-      let i=0;
+      let i=0
       for(let line of heading.querySelectorAll('.line')) {
         const letters = line.textContent.split('')
         line.innerHTML = ''
         for(let letter of letters) {
-          line.innerHTML += `<span class="letter ${letter === ' ' ? 'space' : ''}" style="transition-delay: ${i*15}ms;">${letter}</span>`
+          line.innerHTML += `<span class="letter ${(i > 15 && i < 24 && j === 1) || (i > 18 && i < 22 && j === 2) || (i > 4 && i < 8 && j === 3) ? 'italic' : ''} ${(i > 15 && i < 24 && j === 1) || (i > 20 && i < 26 && j === 3) ? 'beige' : ''} ${letter === ' ' ? 'space' : ''}" style="transition-delay: ${i*15}ms;">${letter}</span>`
           i++
         }
       }
+      j++
+    }
+    
+    i=0
+    for(let face of document.querySelectorAll('.face')) {
+      face.style.transitionDelay = `${i*100}ms`
+      i++
     }
 
   }, [])
@@ -112,10 +173,16 @@ function App() {
             <img  className="layer full" src={layer8} alt="Photo de Paris" />
             <div className="layer text">
               <img src={visit} alt="Visit" />
-              <h1 className="heading">Paris</h1>
+              <h1 className="heading">
+                <span className="letter">P</span>
+                <span className="letter">a</span>
+                <span className="letter">r</span>
+                <span className="letter">i</span>
+                <span className="letter">s</span>
+              </h1>
               <div className="w-full flex justify-center gap-4">
-                <div className="cta">Learn more</div>
-                <div className="cta dark">Book a <span>guide</span></div>
+                <div className="cta"><div>Learn more</div></div>
+                <div className="cta dark"><div>Book a <span>guide</span></div></div>
               </div>
             </div>
             <div className="bars flex">
@@ -132,7 +199,7 @@ function App() {
           <Strokes />
           <h2 className="heading-regular galins animated"><span className="line">Discover the</span><span className="line">City of the Lights</span></h2>
           <p className="paragraphe">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Urna, mauris amet, scelerisque nec velit quam eget eu volutpat. Amet duis risus odio hendrerit.</p>
-          <div className="mt-12 grid grid-cols-3 grid-gap-4">
+          <div className="mt-12 flex justify-center flex-wrap gap-10">
             <Box title="Montmartres" illu={visit1} />
             <Box title="Montmartres" illu={visit2} bottom={true} />
             <Box title="Montmartres" illu={visit3} />
@@ -143,7 +210,7 @@ function App() {
             <div className="dot w-4 h-4 rounded-full" />
           </div>
         </section>
-        <section ref={sectionPresentation} className="presentation">
+        <section id="presentation" ref={sectionPresentation} className="presentation">
           <img className="brush" src={brush} alt="" />
           <div className="inner">
             <div className="illu">
@@ -157,21 +224,23 @@ function App() {
             <div>
               <h2 className="heading-regular galins animated"><span className="line">Discover</span><span className="line">the City of</span><span className="line">the Lights</span></h2>
               <p className="paragraphe">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Urna, mauris amet, scelerisque nec velit quam eget eu volutpat. Amet duis risus odio hendrerit.</p>
-              <div className="cta dark">Book a <span>guide</span></div>
+              <div className="cta dark"><div>Book a <span>guide</span></div></div>
             </div>
           </div>
+          <img className="circle" src={circleBlack} alt="Paris with locals"/>
         </section>
-        <section ref={sectionGuide} className="guide">
+        <section id="guide" ref={sectionGuide} className="guide">
+          <img className="circle" src={circleWhite} alt="Paris with locals"/>
           <Strokes />
           <div className="inner">
             <div>
               <h2 className="heading-regular galins animated"><span className="line">Find the</span><span className="line">perfect local</span><span className="line">guide</span></h2>
               <p className="paragraphe">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Urna, mauris amet, scelerisque nec velit quam eget eu volutpat. Amet duis risus odio hendrerit.</p>
-              <div className="cta dark">Book a <span>guide</span></div>
+              <div className="cta dark"><div>Book a <span>guide</span></div></div>
             </div>
             <div className="illu">
               <div className="hero">
-                <img src={presentation1} alt="Rue de Paris" />
+                <img src={guide} alt="Rue de Paris" />
               </div>
             </div>
           </div>
