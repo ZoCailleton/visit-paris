@@ -1,3 +1,5 @@
+import AnchorLink from 'react-anchor-link-smooth-scroll'
+
 import './nav.scss'
 
 const Nav = () => {
@@ -11,7 +13,7 @@ const Nav = () => {
                     <div>Blog</div>
                     <div>Contact</div>
                 </div>
-                <div className="cta">Book a guide</div>
+                <div href="#discover" className="cta"><AnchorLink href='#discover'>Book a guide</AnchorLink></div>
             </div>
         </nav>
     )

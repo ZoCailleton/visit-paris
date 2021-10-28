@@ -36,11 +36,15 @@ $beige: #DCB4A7;
         }
         &.line {
             height: 1.2em;
-            display: block;
+            display: flex;
             overflow: hidden;
             .letter {
                 display: block;
                 transform: translateY(110%);
+                transition: 500ms;
+                &.space {
+                    width: 0.15em;
+                }
             }
         }
     }
@@ -50,6 +54,7 @@ $beige: #DCB4A7;
     max-width: 500px;
     font-size: 18px;
     line-height: 1.75em;
+    transition: 500ms;
 }
 
 .header-home {
@@ -75,38 +80,9 @@ $beige: #DCB4A7;
         height: 100%;
         object-fit: cover;
         position: absolute;
-        transition: 1s cubic-bezier(.68,.01,.25,.96);
-        &:nth-child(1) {
-            transform: translateY(600px);
-        }
-        &:nth-child(2) {
-            transform: translateY(550px);
-        }
-        &:nth-child(3) {
-            transform: translateY(500px);
-        }
-        &:nth-child(4) {
-            transform: translateY(450px);
-        }
-        &:nth-child(5) {
-            transform: translateY(400px);
-        }
-        &:nth-child(6) {
-            transform: translateY(350px);
-        }
-        &:nth-child(7) {
-            transform: translateY(300px);
-        }
-        &:nth-child(8) {
-            transform: translateY(150px);
-        }
-        &:nth-child(9) {
-            transform: translateY(50px);
-        }
         &.leaves {
             height: 115%;
             z-index: 1;
-            transform: translateY(0px);
         }
         &.full,
         &.text {
@@ -142,6 +118,7 @@ $beige: #DCB4A7;
             }
             &:nth-child(5) {
                 height: 40px;
+                border-right: 1px solid rgba(255, 255, 255, 0.15);
             }
             &:nth-child(6) {
                 height: 60px;
@@ -173,6 +150,9 @@ section {
             margin: 0 auto;
             text-align: center;
             line-height: 1em;
+            .line {
+                justify-content: center;
+            }
         }
         .paragraphe {
             max-width: 600px;
@@ -188,12 +168,6 @@ section {
                 &.active {
                     background-color: #fff;
                 }
-            }
-        }
-        &.visible {
-            .paragraphe {
-                transform: translateY(0px);
-                opacity: 1;
             }
         }
     }
@@ -284,6 +258,21 @@ section {
         }
         .cta {
             margin-top: 25px;
+        }
+    }
+    &.visible {
+        .paragraphe {
+            transform: translateY(0px);
+            opacity: 1;
+        }
+        .heading-regular {
+            span {
+                &.line {
+                    .letter {
+                        transform: translateY(0%) !important;
+                    }
+                }
+            }
         }
     }
 }
