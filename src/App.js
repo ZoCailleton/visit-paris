@@ -165,7 +165,7 @@ function App() {
           <Strokes />
           <div className="inner">
             <div>
-              <h2 className="heading-regular galins animated"><span className="line">Find the perfect</span><span className="line">local guide</span></h2>
+              <h2 className="heading-regular galins animated"><span className="line">Find the</span><span className="line">perfect local</span><span className="line">guide</span></h2>
               <p className="paragraphe">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Urna, mauris amet, scelerisque nec velit quam eget eu volutpat. Amet duis risus odio hendrerit.</p>
               <div className="cta dark">Book a <span>guide</span></div>
             </div>
