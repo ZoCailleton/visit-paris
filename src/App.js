@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { gsap } from 'gsap'
+import { gsap, Power0 } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { ScrollToPlugin } from 'gsap/ScrollToPlugin'
 
@@ -29,6 +29,7 @@ import brush from './images/presentation/brush.svg'
 import presentation1 from './images/presentation/presentation-01.jpg'
 import presentation2 from './images/presentation/presentation-02.jpg'
 
+import backgroundGuide from './images/guide/background.jpg'
 import guide from './images/guide/guide.jpg'
 
 import circleBlack from './images/presentation/paris-with-locals-black.svg'
@@ -39,7 +40,7 @@ function App() {
   gsap.registerPlugin(ScrollTrigger)
   gsap.registerPlugin(ScrollToPlugin)
 
-  const [step, setStep] = useState(4)
+  const [step, setStep] = useState(0)
 
   const sectionHeader = useRef(null)
   const sectionDiscover = useRef(null)
@@ -54,9 +55,9 @@ function App() {
     if(step === 0) {
       gsap.to(window, {duration: 1.5, scrollTo: "#header", ease: "power2"});
     } else if(step === 1) {
-      gsap.to(window, {duration: 1.5, scrollTo: "#discover", ease: "power2"});
+      gsap.to(window, {duration: 2, scrollTo: "#discover", ease: "power2"});
     } else if(step === 2) {
-      gsap.to(window, {duration: 1.5, scrollTo: "#presentation", ease: "power2"});
+      gsap.to(window, {duration: 2, scrollTo: "#presentation", ease: "power2"});
     } else if(step === 3) {
       gsap.to(window, {duration: 1.5, scrollTo: "#guide", ease: "power2"});
     }
@@ -82,24 +83,38 @@ function App() {
       i++
       gsap.to(layer, {
         top: 400-(i*50),
+        ease: Power0.easeNone,
         scrollTrigger: {
           trigger: '.header-home',
           start: 'top top',
-          end: '115%',
+          end: '120%',
           scrub: true
         }
       });
     }
+    
+    // Leaves
+    gsap.to(document.querySelector('.leaves'), {
+      top: -150,
+      scrollTrigger: {
+        trigger: '.header-home',
+        start: 'top top',
+        end: '120%',
+        scrub: true,
+        marker: true
+      }
+    })
 
+    // Heading
     const posLetters = {
-      1: 200,
-      2: 100,
-      3: 150,
-      4: 100,
-      5: 200
+      1: 35,
+      2: 25,
+      3: 50,
+      4: 25,
+      5: 35
     }
 
-    i=0
+    i=1
     for(let letter of document.querySelectorAll('.header-home .heading .letter')) {
       gsap.to(letter, {
         y: posLetters[i],
@@ -110,23 +125,87 @@ function App() {
           scrub: true
         }
       })
+      i++
     }
 
+    // Boxes
+    for(let illu of document.querySelectorAll('.box-discover .illu img')) {
+      gsap.to(illu, {
+        marginTop: 100,
+        ease: Power0.easeNone,
+        scrollTrigger: {
+          trigger: 'section.discover',
+          start: 'top top',
+          end: 'bottom top',
+          scrub: true
+        }
+      })
+    }
+    
+    // Paris with locals
     for(let circle of document.querySelectorAll('.circle')) {
       gsap.to(circle, {
         rotate: 360,
         scrollTrigger: {
           trigger: '.presentation',
           start: 'top bottom',
-          scrub: true
+          scrub: 1
         }
       })
     }
 
+    // Bars
+    const bars = {
+      1: 200,
+      2: 30,
+      3: 100,
+      4: 30,
+      5: 120,
+      6: 250
+    }
+
+    i=1
+
+    for(let bar of document.querySelectorAll('.bars .bar')) {
+      gsap.to(bar, {
+        height: bars[i],
+        scrollTrigger: {
+          trigger: 'section.discover',
+          start: 'top bottom',
+          end: '50% top',
+          scrub: 1
+        }
+      });
+      i++
+    }
+
+    // Presentation
+    gsap.to('section.presentation .mini-hero', {
+      bottom: 50,
+      ease: Power0.easeNone,
+      scrollTrigger: {
+        trigger: 'section.presentation',
+        start: 'top top',
+        end: 'bottom top',
+        scrub: true
+      }
+    })
+
+    // Guides - Background
+    gsap.to(document.querySelector('section.guide .background'), {
+      y: 0,
+      ease: Power0.easeNone,
+      scrollTrigger: {
+        trigger: 'section.guide',
+        start: 'top bottom',
+        end: 'bottom top',
+        scrub: true
+      }
+    })
+
     document.querySelector('.header-home').classList.add('active')
 
     //Apparition textes
-    
     const headings = document.querySelectorAll('.heading-regular.animated')
 
     let j=1;
@@ -200,7 +279,7 @@ function App() {
           <h2 className="heading-regular galins animated"><span className="line">Discover the</span><span className="line">City of the Lights</span></h2>
           <p className="paragraphe">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Urna, mauris amet, scelerisque nec velit quam eget eu volutpat. Amet duis risus odio hendrerit.</p>
           <div className="mt-12 flex justify-center flex-wrap gap-10">
-            <Box title="Montmartres" illu={visit1} />
+            <Box title="The secrets of Montmartres" illu={visit1} />
             <Box title="Montmartres" illu={visit2} bottom={true} />
             <Box title="Montmartres" illu={visit3} />
           </div>
@@ -230,6 +309,7 @@ function App() {
           <img className="circle" src={circleBlack} alt="Paris with locals"/>
         </section>
         <section id="guide" ref={sectionGuide} className="guide">
+          <img className="background" src={backgroundGuide} alt="Paris" />
           <img className="circle" src={circleWhite} alt="Paris with locals"/>
           <Strokes />
           <div className="inner">

@@ -13,7 +13,7 @@ const Nav = () => {
                     <div>Blog</div>
                     <div>Contact</div>
                 </div>
-                <div href="#discover" className="cta"><AnchorLink href='#discover'>Book a guide</AnchorLink></div>
+                <div href="#discover" className="cta"><div>Book a guide</div></div>
             </div>
         </nav>
     )
