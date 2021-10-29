@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { gsap, Power0 } from 'gsap'
+import { gsap, Power0, Power2 } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { ScrollToPlugin } from 'gsap/ScrollToPlugin'
 
@@ -53,13 +53,13 @@ function App() {
   useEffect(() => {
 
     if(step === 0) {
-      gsap.to(window, {duration: 1.5, scrollTo: "#header", ease: "power2"});
+      gsap.to(window, {duration: 1.5, scrollTo: "#header", ease: Power2.easeInOut});
     } else if(step === 1) {
-      gsap.to(window, {duration: 2, scrollTo: "#discover", ease: "power2"});
+      gsap.to(window, {duration: 2, scrollTo: "#discover", ease: Power2.easeInOut});
     } else if(step === 2) {
-      gsap.to(window, {duration: 2, scrollTo: "#presentation", ease: "power2"});
+      gsap.to(window, {duration: 2, scrollTo: "#presentation", ease: Power2.easeInOut});
     } else if(step === 3) {
-      gsap.to(window, {duration: 1.5, scrollTo: "#guide", ease: "power2"});
+      gsap.to(window, {duration: 1.5, scrollTo: "#guide", ease: Power2.easeInOut});
     }
 
   }, [step])
@@ -87,11 +87,21 @@ function App() {
         scrollTrigger: {
           trigger: '.header-home',
           start: 'top top',
-          end: '120%',
+          end: 'bottom top',
           scrub: true
         }
       });
     }
+
+    gsap.to(document.querySelector('.header-home .cta.dark'), {
+      y: 30,
+      scrollTrigger: {
+        trigger: '.header-home',
+        start: 'top top',
+        end: 'bottom top',
+        scrub: true
+      }
+    })
     
     // Leaves
     gsap.to(document.querySelector('.leaves'), {
@@ -99,9 +109,8 @@ function App() {
       scrollTrigger: {
         trigger: '.header-home',
         start: 'top top',
-        end: '120%',
-        scrub: true,
-        marker: true
+        end: 'bottom top',
+        scrub: true
       }
     })
 
@@ -145,7 +154,7 @@ function App() {
     // Paris with locals
     for(let circle of document.querySelectorAll('.circle')) {
       gsap.to(circle, {
-        rotate: 360,
+        rotate: 480,
         scrollTrigger: {
           trigger: '.presentation',
           start: 'top bottom',
