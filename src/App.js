@@ -22,6 +22,8 @@ import layer8 from './images/header/layer-8.png'
 import visit from './images/header/visit.svg'
 
 import visit1 from './images/discover/visit-01.jpg'
+import visit1_2 from './images/discover/visit-01-2.jpg'
+import visit1_3 from './images/discover/visit-01-3.jpg'
 import visit2 from './images/discover/visit-02.jpg'
 import visit3 from './images/discover/visit-03.jpg'
 
@@ -30,7 +32,10 @@ import presentation1 from './images/presentation/presentation-01.jpg'
 import presentation2 from './images/presentation/presentation-02.jpg'
 
 import backgroundGuide from './images/guide/background.jpg'
-import guide from './images/guide/guide.jpg'
+import bgGuide1 from './images/guide/background-01.jpg'
+import bgGuide2 from './images/guide/background-02.jpg'
+import guide1 from './images/guide/guide-01.png'
+import guide2 from './images/guide/guide-02.png'
 
 import circleBlack from './images/presentation/paris-with-locals-black.svg'
 import circleWhite from './images/presentation/paris-with-locals-white.svg'
@@ -40,7 +45,7 @@ function App() {
   gsap.registerPlugin(ScrollTrigger)
   gsap.registerPlugin(ScrollToPlugin)
 
-  const [step, setStep] = useState(0)
+  const [step, setStep] = useState(4)
 
   const sectionHeader = useRef(null)
   const sectionDiscover = useRef(null)
@@ -55,9 +60,9 @@ function App() {
     if(step === 0) {
       gsap.to(window, {duration: 1.5, scrollTo: "#header", ease: Power2.easeInOut});
     } else if(step === 1) {
-      gsap.to(window, {duration: 2, scrollTo: "#discover", ease: Power2.easeInOut});
+      gsap.to(window, {duration: 2, scrollTo: {y: "#discover", offsetY: -100}, ease: Power2.easeInOut});
     } else if(step === 2) {
-      gsap.to(window, {duration: 2, scrollTo: "#presentation", ease: Power2.easeInOut});
+      gsap.to(window, {duration: 2, scrollTo: {y: "#presentation", offsetY: -100}, ease: Power2.easeInOut});
     } else if(step === 3) {
       gsap.to(window, {duration: 1.5, scrollTo: "#guide", ease: Power2.easeInOut});
     }
@@ -93,8 +98,7 @@ function App() {
       });
     }
 
-    gsap.to(document.querySelector('.header-home .cta.dark'), {
-      y: 30,
+    let tl = gsap.timeline({
       scrollTrigger: {
         trigger: '.header-home',
         start: 'top top',
@@ -102,6 +106,9 @@ function App() {
         scrub: true
       }
     })
+    
+    tl.to(document.querySelectorAll('.header-home .btn:nth-child(1)'), {y: 15, rotate: 2})
+    tl.to(document.querySelectorAll('.header-home .btn:nth-child(2)'), {y: 30, rotate: -2, filter: 'blur(1px)'})
     
     // Leaves
     gsap.to(document.querySelector('.leaves'), {
@@ -116,17 +123,33 @@ function App() {
 
     // Heading
     const posLetters = {
-      1: 35,
-      2: 25,
-      3: 50,
-      4: 25,
-      5: 35
+      1: {
+        y: 35,
+        rotate: 4
+      },
+      2: {
+        y: 25,
+        rotate: 0
+      },
+      3: {
+        y: 50,
+        rotate: 0
+      },
+      4: {
+        y: 25,
+        rotate: -1
+      },
+      5: {
+        y: 35,
+        rotate: -5
+      }
     }
 
     i=1
     for(let letter of document.querySelectorAll('.header-home .heading .letter')) {
       gsap.to(letter, {
-        y: posLetters[i],
+        y: posLetters[i].y,
+        rotate: posLetters[i].rotate,
         scrollTrigger: {
           trigger: '.header-home',
           start: 'top top',
@@ -135,20 +158,6 @@ function App() {
         }
       })
       i++
-    }
-
-    // Boxes
-    for(let illu of document.querySelectorAll('.box-discover .illu img')) {
-      gsap.to(illu, {
-        marginTop: 100,
-        ease: Power0.easeNone,
-        scrollTrigger: {
-          trigger: 'section.discover',
-          start: 'top top',
-          end: 'bottom top',
-          scrub: true
-        }
-      })
     }
     
     // Paris with locals
@@ -188,29 +197,18 @@ function App() {
       i++
     }
 
-    // Presentation
-    gsap.to('section.presentation .mini-hero', {
-      bottom: 50,
-      ease: Power0.easeNone,
-      scrollTrigger: {
-        trigger: 'section.presentation',
-        start: 'top top',
-        end: 'bottom top',
-        scrub: true
-      }
-    })
-
     // Guides - Background
-    gsap.to(document.querySelector('section.guide .background'), {
-      y: 0,
-      ease: Power0.easeNone,
+
+    tl = gsap.timeline({
       scrollTrigger: {
         trigger: 'section.guide',
         start: 'top bottom',
-        end: 'bottom top',
+        end: 'bottom bottom',
         scrub: true
       }
-    })
+    });
+
+    tl.to(document.querySelector('section.guide .background'), 1, {y: 0, opacity: 0.2, ease: Power0.easeNone})
 
     document.querySelector('.header-home').classList.add('active')
 
@@ -238,6 +236,32 @@ function App() {
     }
 
   }, [])
+
+  const playCarouselGuides = to => {
+
+    let tl = gsap.timeline();
+
+    if(to === 1) {
+
+      tl
+      .to('section.guide .hero .carousel', 1, {x: 0, ease: Power2.easeInOut})
+      .to('section.guide .hero .carousel .slide:nth-child(1) .subject', 1, {marginLeft: 0, ease: Power2.easeInOut}, '-=1')
+      .to('section.guide .hero .carousel .slide:nth-child(1) .landscape', 1, {marginLeft: 0, ease: Power2.easeInOut}, '-=1')
+      .to('section.guide .hero .carousel .slide:nth-child(2) .subject', 1, {marginLeft: 200, ease: Power2.easeInOut}, '-=1')
+      .to('section.guide .hero .carousel .slide:nth-child(2) .landscape', 1, {marginLeft: -50, ease: Power2.easeInOut}, '-=1')
+      
+    } else if(to === 2) {
+
+      tl
+      .to('section.guide .hero .carousel', 1, {x: '-50%', ease: Power2.easeInOut})
+      .to('section.guide .hero .carousel .slide:nth-child(1) .subject', 1, {marginLeft: -100, ease: Power2.easeInOut}, '-=1')
+      .to('section.guide .hero .carousel .slide:nth-child(1) .landscape', 1, {marginLeft: 50, ease: Power2.easeInOut}, '-=1')
+      .to('section.guide .hero .carousel .slide:nth-child(2) .subject', 1, {marginLeft: 0, ease: Power2.easeInOut}, '-=1')
+      .to('section.guide .hero .carousel .slide:nth-child(2) .landscape', 1, {marginLeft: 0, ease: Power2.easeInOut}, '-=1')
+
+    }
+
+  }
 
   return (
     <>
@@ -269,8 +293,8 @@ function App() {
                 <span className="letter">s</span>
               </h1>
               <div className="w-full flex justify-center gap-4">
-                <div className="cta"><div>Learn more</div></div>
-                <div className="cta dark"><div>Book a <span>guide</span></div></div>
+                <div className="btn"><div>Learn more</div></div>
+                <div className="btn dark"><div>Book a <span>guide</span></div></div>
               </div>
             </div>
             <div className="bars flex">
@@ -286,16 +310,11 @@ function App() {
         <section id="discover" ref={sectionDiscover} className="discover bg-black">
           <Strokes />
           <h2 className="heading-regular galins animated"><span className="line">Discover the</span><span className="line">City of the Lights</span></h2>
-          <p className="paragraphe">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Urna, mauris amet, scelerisque nec velit quam eget eu volutpat. Amet duis risus odio hendrerit.</p>
+          <p className="paragraphe"><span className="line"><span>We offer many classic but also atypical and original tours</span></span><span className="line"><span>to discover the city and its most charming</span></span><span className="line"><span> places</span></span></p>
           <div className="mt-12 flex justify-center flex-wrap gap-10">
-            <Box title="The secrets of Montmartres" illu={visit1} />
-            <Box title="Montmartres" illu={visit2} bottom={true} />
-            <Box title="Montmartres" illu={visit3} />
-          </div>
-          <div className="dots mt-8 flex justify-center gap-3">
-            <div className="dot active w-4 h-4 rounded-full" />
-            <div className="dot w-4 h-4 rounded-full" />
-            <div className="dot w-4 h-4 rounded-full" />
+            <Box title="The secrets of Montmartres" illu={visit1} illu2={visit1_2} illu3={visit1_3} faces={[1, 2, 3]} />
+            <Box title="Montmartres" illu={visit2} faces={[4, 5]} bottom={true} />
+            <Box title="Montmartres" illu={visit3} faces={[6, 7, 8]} />
           </div>
         </section>
         <section id="presentation" ref={sectionPresentation} className="presentation">
@@ -311,8 +330,8 @@ function App() {
             </div>
             <div>
               <h2 className="heading-regular galins animated"><span className="line">Discover</span><span className="line">the City of</span><span className="line">the Lights</span></h2>
-              <p className="paragraphe">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Urna, mauris amet, scelerisque nec velit quam eget eu volutpat. Amet duis risus odio hendrerit.</p>
-              <div className="cta dark"><div>Book a <span>guide</span></div></div>
+              <p className="paragraphe"><span className="line"><span>What better to discover a city than to be</span></span><span className="line"><span>guided by its inhabitants ? Let yourself be</span></span><span className="line"><span>guided and discover the secrets of Paris</span></span><span className="line"><span>while going off the beaten track.</span></span></p>
+              <div className="cta"><div>Book a <span>guide</span></div></div>
             </div>
           </div>
           <img className="circle" src={circleBlack} alt="Paris with locals"/>
@@ -324,16 +343,27 @@ function App() {
           <div className="inner">
             <div>
               <h2 className="heading-regular galins animated"><span className="line">Find the</span><span className="line">perfect local</span><span className="line">guide</span></h2>
-              <p className="paragraphe">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Urna, mauris amet, scelerisque nec velit quam eget eu volutpat. Amet duis risus odio hendrerit.</p>
-              <div className="cta dark"><div>Book a <span>guide</span></div></div>
+              <p className="paragraphe"><span className="line"><span>Lorem ipsum dolor sit amet, consectetur</span></span><span className="line"><span>adipiscing elit. Urna, mauris amet, scelerisque nec</span></span><span className="line"><span>velit quam eget eu volutpat. Amet duis risus odio</span></span><span className="line"><span>hendrerit.</span></span></p>
+              <div className="cta"><div>Book a <span>guide</span></div></div>
             </div>
             <div className="illu">
               <div className="hero">
-                <img src={guide} alt="Rue de Paris" />
+                <div className="infos" />
+                <div className="carousel">
+                  <div onClick={() => playCarouselGuides(2)} className="slide">
+                    <img className="landscape" src={bgGuide1} alt="Rue de Paris" />
+                    <img className="subject" src={guide1} alt="Femme portant un bérêt rouge" />
+                  </div>
+                  <div onClick={() => playCarouselGuides(1)} className="slide">
+                    <img className="landscape" src={bgGuide2} alt="Rue de Paris" />
+                    <img className="subject" src={guide2} alt="Femme portant un bérêt rouge" />
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </section>
+        <section className="h-screen bg-black"></section>
       </div>
     </>
   );

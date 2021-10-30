@@ -2,21 +2,44 @@
     width: 350px;
     opacity: 0;
     z-index: 1;
-    transition: 300ms linear;
+    transform: translateY(100px);
+    transition: 750ms;
     &.bottom {
         margin-top: 35px;
     }
     .illu {
         height: 350px;
         background-color: #222;
-        border-radius: 5px;
-        overflow: hidden;
-        img {
-            width: 100%;
+        .dot {
+            width: 10px;
+            height: 10px;
+            background-color: #fff;
+            border-radius: 5px;
+            opacity: 0.25;
+            transition: 500ms;
+            cursor: pointer;
+            &.active {
+                width: 35px;
+                opacity: 1;
+            }
+        }
+        .carousel {
+            width: 300%;
             height: 100%;
-            object-fit: cover;
-            transform: scale(1.35);
-            transition: transform 750ms;
+            display: flex;
+            transition: 500ms;
+            > div {
+                width: calc(100%/3);
+                height: 100%;
+                overflow: hidden;
+                img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                    transform: scale(1.25);
+                    transition: transform 750ms;
+                }
+            }
         }
     }
     .heading {
@@ -44,21 +67,22 @@
 
 .visible {
     .box-discover {
+        transform: translateY(0);
         opacity: 1;
         &:nth-child(2) {
             transition-delay: 250ms;
             img {
-                transition-delay: 250ms;
+                transition-delay: 250ms !important;
             }
         }
         &:nth-child(3) {
             transition-delay: 500ms;
             img {
-                transition-delay: 500ms;
+                transition-delay: 500ms !important;
             }
         }
         img {
-            transform: scale(1.15);
+            transform: scale(1) !important;
         }
         .face {
             transform: translateY(0) !important;

@@ -9,23 +9,29 @@ $beige: #DCB4A7;
 .cta {
     width: 100%;
     max-width: 180px;
-    background-color: #fff;
-    font-size: 20px;
-    color: #000;
+    background-color: $beige;
+    margin-top: 25px;
+    overflow: hidden;
+    transform: translateY(50px);
+    opacity: 0;
+    transition-delay: 1s;
+    transition: 1.25s cubic-bezier(.79,.01,.31,.95);
+    font-size: 22px;
+    color: #fff;
     font-family: 'Bebas Neue';
     text-align: center;
     cursor: pointer;
     div {
         width: 100%;
         height: 100%;
-        padding: 15px 0 12px;
-    }
-    &.dark {
         background-color: #000;
-        color: #fff;
-        span {
-            color: $beige;
-        }
+        padding: 15px 0 12px;
+        transform: translateY(100%);
+        transition-delay: 500ms;
+        transition: 1s cubic-bezier(.79,.01,.31,.95);
+    }
+    span {
+        color: $beige;
     }
 }
 
@@ -58,11 +64,26 @@ $beige: #DCB4A7;
 
 .paragraphe {
     max-width: 500px;
-    font-size: 18px;
-    line-height: 1.75em;
-    transform: translateY(50px);
-    opacity: 0;
-    transition: 500ms;
+    font-size: 22px;
+    line-height: 1.5em;
+    .line {
+        height: 1.35em;
+        display: block;
+        overflow: hidden;
+        span {
+            display: inline-block;
+            transform: translateY(100%);
+            transform-origin: left;
+            transition: 500ms ease-in-out;
+        }
+        @for $i from 1 through 4 {
+            &:nth-child(#{$i}) {
+                span {
+                    transition-delay: ($i * 100) + 400ms;
+                }
+            }
+        }
+    }
 }
 
 .header-home {
@@ -88,6 +109,7 @@ $beige: #DCB4A7;
         height: 100%;
         object-fit: cover;
         position: absolute;
+        will-change: transform;
         &.leaves {
             height: 115%;
             z-index: 1;
@@ -111,6 +133,25 @@ $beige: #DCB4A7;
         line-height: 1em;
         span {
             display: inline-block;
+            filter: blur(0px);
+            will-change: transform;
+        }
+    }
+    .btn {
+        width: 200px;
+        background-color: #fff;
+        padding: 15px 0 12px;
+        font-size: 22px;
+        color: #000;
+        font-family: 'Bebas Neue';
+        text-align: center;
+        filter: blur(0px);
+        &.dark {
+            background-color: #000;
+            color: #fff;
+            span {
+                color: $beige;
+            }
         }
     }
     .bars {
@@ -121,7 +162,7 @@ $beige: #DCB4A7;
         .bar {
             width: 255px;
             background-color: #000;
-            &:nth-child(1) {
+            /* &:nth-child(1) {
                 height: 40px;
             }
             &:nth-child(3) {
@@ -132,7 +173,7 @@ $beige: #DCB4A7;
             }
             &:nth-child(6) {
                 height: 40px;
-            }
+            } */
         }
     }
 }
@@ -158,11 +199,11 @@ section {
         img {
             transform: scale(1.25);
             transition-delay: 750ms;
-            transition: 1s;
+            transition: transform 1s;
         }
     }
     &.discover {
-        padding: 125px 10% 25px;
+        padding: 150px 10% 25px;
         position: relative;
         color: #fff;
         z-index: 2;
@@ -191,8 +232,12 @@ section {
         }
     }
     &.presentation {
+        background-image: url('./images/presentation/paris-map.jpg');
+        background-size: 35%;
+        background-repeat: no-repeat;
+        background-position: right top;
         background-color: #fff;
-        padding: 150px 0 150px;
+        padding: 250px 0 150px;
         position: relative;
         z-index: 1;
         .inner {
@@ -204,24 +249,10 @@ section {
             .paragraphe {
                 margin-top: 1em;
             }
-            .cta {
-                background-color: $beige;
-                margin-top: 25px;
-                overflow: hidden;
-                transform: translateY(50px);
-                opacity: 0;
-                transition-delay: 250ms;
-                transition: 1s cubic-bezier(.79,.01,.31,.95);
-                div {
-                    background-color: #000;
-                    transform: translateY(100%);
-                    transition-delay: 250ms;
-                    transition: 1s cubic-bezier(.79,.01,.31,.95);
-                }
-            }
             .hero {
                 width: 475px;
                 height: 600px;
+                background-color: #000;
             }
             .mini-hero {
                 width: 300px;
@@ -247,7 +278,15 @@ section {
             width: 110%;
             position: absolute;
             top: -150px;
-            transition: 1s;
+        }
+        .petals {
+            width: 200px;
+            position: absolute;
+            right: 50px;
+            top: 0;
+            z-index: 1;
+            transform: translateY(250px);
+            filter: blur(5px);
         }
         .circle {
             width: 150px;
@@ -257,9 +296,6 @@ section {
             z-index: 1;
         }
         &.visible {
-            .brush {
-                top: -300px;
-            }
             .mini-hero {
                 transform: translateY(0);
                 opacity: 1;
@@ -268,29 +304,38 @@ section {
     }
     &.guide {
         background-color: #000;
-        padding: 150px 5% 150px;
+        padding: 200px 5%;
         display: flex;
         align-items: center;
         position: relative;
         overflow: hidden;
+        &::before,
         &::after {
             content: '';
             width: 50%;
             height: 75px;
-            background-color: #fff;
             position: absolute;
+            transition: 500ms;
+        }
+        &::before {
+            background-color: #fff;
             left: 0;
             top: 0;
-            transition: 500ms;
+        }
+        &::after {
+            background-color: #000;
+            right: 0;
+            bottom: 0;
         }
         .background {
             width: 100%;
             height: 100%;
             position: absolute;
             left: 0;
+            top: 0;
             object-fit: cover;
-            opacity: 0.2;
-            transform: translateY(-400px);
+            opacity: 0.75;
+            transform: translateY(-200px);
         }
         .inner {
             position: relative;
@@ -307,15 +352,48 @@ section {
             display: flex;
             justify-content: center;
         }
-        .cta {
-            margin-top: 25px;
-        }
         .hero {
+            width: 475px;
             height: 600px;
-            img {
+            .infos {
                 width: 100%;
+                height: 120px;
+                background-color: rgba(0, 0, 0, 0.5);
+                backdrop-filter: blur(10px);
+                position: absolute;
+                left: 0;
+                bottom: 0;
+                z-index: 1;
+            }
+            .carousel {
+                width: 200%;
                 height: 100%;
-                object-fit: cover;
+                display: flex;
+                .slide {
+                    width: 50%;
+                    height: 100%;
+                    display: flex;
+                    align-items: center;
+                    position: relative;
+                    overflow: hidden;
+                    img {
+                        width: 100%;
+                        height: 100%;
+                        object-fit: cover;
+                        position: absolute;
+                        &.subject {
+                            transform: scale(1.1);
+                        }
+                    }
+                    &:nth-child(2) {
+                        .subject {
+                            margin-left: 200px;
+                        }
+                        .landscape {
+                            margin-left: -50px;
+                        }
+                    }
+                }
             }
         }
         .circle {
@@ -328,14 +406,17 @@ section {
     }
     &.visible {
         .paragraphe {
-            transform: translateY(0px);
-            opacity: 1;
+            .line {
+                span {
+                    transform: translateY(0);
+                }
+            }
         }
         .hero {
             transform: translateY(0);
             opacity: 1;
             img {
-                transform: scale(1);
+                transform: scale(1) !important;
             }
         }
         .heading-regular {

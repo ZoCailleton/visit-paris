@@ -1,25 +1,32 @@
-import { useEffect } from 'react'
-import axios from 'axios'
+import { useState } from 'react'
+
 import './box.scss'
 
-const Box = ({ title, illu, bottom }) => {
+const Box = ({ title, illu, illu2, illu3, faces, bottom }) => {
 
-    useEffect(() => {
-        axios.get(`https://randomuser.me/api/`)
-        .then(res => {
-            console.log(res.data.results[0].picture.thumbnail)
-        })
-    }, []);
+    const [visibleIllu, setVisibleIllu] = useState(1)
 
     return (
         <div className={`box-discover ${bottom && 'bottom'}`}>
             <div className="illu transition relative">
                 <div className="flex gap-2 absolute right-5 bottom-5 z-10">
-                    <div className="w-10 h-2 bg-white rounded-full" />
-                    <div className="w-5 h-2 bg-white rounded-full opacity-50" />
-                    <div className="w-5 h-2 bg-white rounded-full opacity-50" />
+                    <div onClick={() => setVisibleIllu(1)} className={`dot ${visibleIllu === 1 ? 'active' : ''}`} />
+                    <div onClick={() => setVisibleIllu(2)} className={`dot ${visibleIllu === 2 ? 'active' : ''}`} />
+                    <div onClick={() => setVisibleIllu(3)} className={`dot ${visibleIllu === 3 ? 'active' : ''}`} />
                 </div>
-                <img className="transition" src={illu} alt="Lieu emblématique de Paris" />
+                <div className="w-full h-full overflow-hidden">
+                    <div style={{ transform: 'translateX(-'+(visibleIllu-1)*(100/3)+'%)' }} className={`carousel`}>
+                        <div>
+                            <img className="transition" src={illu} alt="Lieu emblématique de Paris" />
+                        </div>
+                        <div>
+                            <img className="transition" src={illu2} alt="Lieu emblématique de Paris" />
+                        </div>
+                        <div>
+                            <img className="transition" src={illu3} alt="Lieu emblématique de Paris" />
+                        </div>
+                    </div>
+                </div>
             </div>
             <div className="flex justify-between items-center">
                 <div>
@@ -27,13 +34,20 @@ const Box = ({ title, illu, bottom }) => {
                     <p>with Pierre</p>
                 </div>
                 <div className="flex">
-                    <div className="face"></div>
-                    <div className="face"></div>
-                    <div className="face"></div>
+                    {faces.map((f, i) => {
+                        <div className="face">
+                            <img key={i} src={`/assets/users/user-0${f}.jpg`} alt="Utilisateur" />
+                        </div>
+                    })}
                 </div>
             </div>
         </div>
     )
+}
+
+Box.defaultProps = {
+    illu2: null,
+    illu3: null
 }
 
 export default Box

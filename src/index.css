@@ -3,11 +3,20 @@
     src: url('./fonts/galins/galins-regular.otf');
 }
 
+@font-face {
+    font-family: 'Sofia Pro';
+    src: url('./fonts/sofia-pro/sofia-pro-light.otf');
+}
+
 body {
     background-color: #111;
-    font-family: 'Poppins';
+    font-family: 'Sofia Pro';
 }
 
 .galins {
     font-family: 'Galins';
+}
+
+.paragraphe {
+    font-family: 'Sofia Pro';
 }
