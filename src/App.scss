@@ -124,6 +124,9 @@ $beige: #DCB4A7;
             justify-content: center;
             align-items: center;
         }
+        &:nth-child(4) {
+            transform: translateY(400px);
+        }
     }
     .heading {
         margin-top: -40px;
@@ -139,18 +142,23 @@ $beige: #DCB4A7;
     }
     .btn {
         width: 200px;
-        background-color: #fff;
-        padding: 15px 0 12px;
+        background-color: $beige;
         font-size: 22px;
         color: #000;
         font-family: 'Bebas Neue';
         text-align: center;
         filter: blur(0px);
+        div {
+            background-color: #fff;
+            padding: 15px 0 12px;
+        }
         &.dark {
-            background-color: #000;
-            color: #fff;
-            span {
-                color: $beige;
+            div {
+                background-color: #000;
+                color: #fff;
+                span {
+                    color: $beige;
+                }
             }
         }
     }

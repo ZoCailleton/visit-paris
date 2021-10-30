@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { gsap, Power0, Power2 } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { ScrollToPlugin } from 'gsap/ScrollToPlugin'
@@ -6,7 +6,6 @@ import { ScrollToPlugin } from 'gsap/ScrollToPlugin'
 import './App.scss';
 
 import Nav from './components/nav/Nav'
-import Loader from './components/loader/Loader'
 import Strokes from './components/strokes/Strokes'
 import Box from './components/box/Box'
 
@@ -131,7 +130,7 @@ function App() {
         rotate: 0
       },
       3: {
-        y: 50,
+        y: 15,
         rotate: 0
       },
       4: {
@@ -207,7 +206,18 @@ function App() {
       }
     });
 
-    tl.to(document.querySelector('section.guide .background'), 1, {y: 200, opacity: 0.2, ease: Power0.easeNone})
+    tl.to(document.querySelector('section.guide .background'), 1, {y: 200, opacity: 0.2, ease: Power0.easeNone});
+
+    gsap.to(document.querySelector('.main-nav'), {
+      y: -150,
+      ease: Power0.easeNone,
+      scrollTrigger: {
+        trigger: 'section.guide',
+        start: 'top top',
+        end: 'bottom top',
+        scrub: true
+      }
+    })
 
     document.querySelector('.header-home').classList.add('active')
 
@@ -281,7 +291,6 @@ function App() {
       </div>
       <div className="wrapper">
         <Nav />
-        <Loader />
         <header id="header" className="header-home">
           <img className="layer leaves" src={leaves} alt="Photo de Paris" />
           <div className="container-layer">

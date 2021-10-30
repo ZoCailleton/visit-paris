@@ -20,18 +20,33 @@
         max-width: 1440px;
         margin: 0 auto;
         padding: 20px;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.22);
         display: flex;
         justify-content: space-between;
         align-items: center;
         position: relative;
         z-index: 1;
+        .border-elt {
+            width: 100%;
+            height: 2px;
+            background-color: rgba(255, 255, 255, 0.22);
+            position: absolute;
+            left: 0;
+            bottom: 0;
+        }
         .logo {
             font-size: 35px;
         }
         .items {
             grid-gap: 25px;
             font-size: 22px;
+            > div {
+                height: 1.15em;
+                overflow: hidden;
+                span {
+                    display: block;
+                    transform: translateY(1em);
+                }
+            }
         }
     }
 }
