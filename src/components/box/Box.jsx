@@ -9,7 +9,7 @@ const Box = ({ title, illu, illu2, illu3, faces, bottom }) => {
     return (
         <div className={`box-discover ${bottom && 'bottom'}`}>
             <div className="illu transition relative">
-                <div className="flex gap-2 absolute right-5 bottom-5 z-10">
+                <div className="flex gap-3 absolute right-5 bottom-5 z-10">
                     <div onClick={() => setVisibleIllu(1)} className={`dot ${visibleIllu === 1 ? 'active' : ''}`} />
                     <div onClick={() => setVisibleIllu(2)} className={`dot ${visibleIllu === 2 ? 'active' : ''}`} />
                     <div onClick={() => setVisibleIllu(3)} className={`dot ${visibleIllu === 3 ? 'active' : ''}`} />
@@ -17,13 +17,13 @@ const Box = ({ title, illu, illu2, illu3, faces, bottom }) => {
                 <div className="w-full h-full overflow-hidden">
                     <div style={{ transform: 'translateX(-'+(visibleIllu-1)*(100/3)+'%)' }} className={`carousel`}>
                         <div>
-                            <img className="transition" src={illu} alt="Lieu emblématique de Paris" />
+                            <img style={{ marginLeft: visibleIllu === 1 ? 0 : 100 }} className="transition" src={illu} alt="Lieu emblématique de Paris" />
                         </div>
                         <div>
-                            <img className="transition" src={illu2} alt="Lieu emblématique de Paris" />
+                            <img style={{ marginLeft: visibleIllu === 2 ? 0 : visibleIllu === 3 ? 100 : -100 }}className="transition" src={illu2} alt="Lieu emblématique de Paris" />
                         </div>
                         <div>
-                            <img className="transition" src={illu3} alt="Lieu emblématique de Paris" />
+                            <img style={{ marginLeft: visibleIllu === 3 ? 0 : -100 }}  className="transition" src={illu3} alt="Lieu emblématique de Paris" />
                         </div>
                     </div>
                 </div>

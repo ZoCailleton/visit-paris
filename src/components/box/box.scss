@@ -10,16 +10,18 @@
     .illu {
         height: 350px;
         background-color: #222;
+        border-radius: 5px;
+        overflow: hidden;
         .dot {
-            width: 10px;
+            width: 25px;
             height: 10px;
             background-color: #fff;
             border-radius: 5px;
             opacity: 0.25;
-            transition: 500ms;
+            transition: 750ms cubic-bezier(.91,.02,.3,.98);
             cursor: pointer;
             &.active {
-                width: 35px;
+                width: 50px;
                 opacity: 1;
             }
         }
@@ -27,9 +29,9 @@
             width: 300%;
             height: 100%;
             display: flex;
-            transition: 500ms;
+            transition: 750ms cubic-bezier(.91,.02,.3,.98);
             > div {
-                width: calc(100%/3);
+                width: calc(100% / 3);
                 height: 100%;
                 overflow: hidden;
                 img {
@@ -37,7 +39,7 @@
                     height: 100%;
                     object-fit: cover;
                     transform: scale(1.25);
-                    transition: transform 750ms;
+                    transition: transform 750ms, margin 750ms cubic-bezier(.91,.02,.3,.98);
                 }
             }
         }

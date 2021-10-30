@@ -40,20 +40,17 @@ import guide2 from './images/guide/guide-02.png'
 import circleBlack from './images/presentation/paris-with-locals-black.svg'
 import circleWhite from './images/presentation/paris-with-locals-white.svg'
 
+import arrow from './images/icons/arrow.svg'
+
 function App() {
     
   gsap.registerPlugin(ScrollTrigger)
   gsap.registerPlugin(ScrollToPlugin)
 
-  const [step, setStep] = useState(4)
-
-  const sectionHeader = useRef(null)
-  const sectionDiscover = useRef(null)
-  const sectionPresentation = useRef(null)
-  const sectionGuide = useRef(null)
+  const [step, setStep] = useState(0)
 
   const handlePrev = () => step > 0 ? setStep(step - 1) : setStep(4)
-  const handleNext = () => step < 3 ? setStep(step + 1) : setStep(0)
+  const handleNext = () => step < 4 ? setStep(step + 1) : setStep(0)
 
   useEffect(() => {
 
@@ -65,6 +62,8 @@ function App() {
       gsap.to(window, {duration: 2, scrollTo: {y: "#presentation", offsetY: -100}, ease: Power2.easeInOut});
     } else if(step === 3) {
       gsap.to(window, {duration: 1.5, scrollTo: "#guide", ease: Power2.easeInOut});
+    } else if(step === 4) {
+      gsap.to(window, {duration: 2, scrollTo: "#black", ease: Power2.easeInOut});
     }
 
   }, [step])
@@ -174,12 +173,12 @@ function App() {
 
     // Bars
     const bars = {
-      1: 200,
-      2: 30,
+      1: 250,
+      2: 50,
       3: 100,
-      4: 30,
-      5: 120,
-      6: 250
+      4: 50,
+      5: 150,
+      6: 300
     }
 
     i=1
@@ -203,12 +202,12 @@ function App() {
       scrollTrigger: {
         trigger: 'section.guide',
         start: 'top bottom',
-        end: 'bottom bottom',
+        end: 'bottom top',
         scrub: true
       }
     });
 
-    tl.to(document.querySelector('section.guide .background'), 1, {y: 0, opacity: 0.2, ease: Power0.easeNone})
+    tl.to(document.querySelector('section.guide .background'), 1, {y: 200, opacity: 0.2, ease: Power0.easeNone})
 
     document.querySelector('.header-home').classList.add('active')
 
@@ -234,6 +233,15 @@ function App() {
       face.style.transitionDelay = `${i*100}ms`
       i++
     }
+    
+    tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: 'section.guide',
+        start: 'top top',
+        end: 'bottom top',
+        scrub: true
+      }
+    })
 
   }, [])
 
@@ -249,6 +257,7 @@ function App() {
       .to('section.guide .hero .carousel .slide:nth-child(1) .landscape', 1, {marginLeft: 0, ease: Power2.easeInOut}, '-=1')
       .to('section.guide .hero .carousel .slide:nth-child(2) .subject', 1, {marginLeft: 200, ease: Power2.easeInOut}, '-=1')
       .to('section.guide .hero .carousel .slide:nth-child(2) .landscape', 1, {marginLeft: -50, ease: Power2.easeInOut}, '-=1')
+      .to('section.guide .hero .infos .names', 1, {y: 0, ease: Power2.easeInOut}, '-=1')
       
     } else if(to === 2) {
 
@@ -258,6 +267,7 @@ function App() {
       .to('section.guide .hero .carousel .slide:nth-child(1) .landscape', 1, {marginLeft: 50, ease: Power2.easeInOut}, '-=1')
       .to('section.guide .hero .carousel .slide:nth-child(2) .subject', 1, {marginLeft: 0, ease: Power2.easeInOut}, '-=1')
       .to('section.guide .hero .carousel .slide:nth-child(2) .landscape', 1, {marginLeft: 0, ease: Power2.easeInOut}, '-=1')
+      .to('section.guide .hero .infos .names', 1, {y: '-50%', ease: Power2.easeInOut}, '-=1')
 
     }
 
@@ -272,7 +282,7 @@ function App() {
       <div className="wrapper">
         <Nav />
         <Loader />
-        <header id="header" ref={sectionHeader} className="header-home">
+        <header id="header" className="header-home">
           <img className="layer leaves" src={leaves} alt="Photo de Paris" />
           <div className="container-layer">
             <img className="layer" src={layer1} alt="Photo de Paris" />
@@ -307,7 +317,7 @@ function App() {
             </div>
           </div>
         </header>
-        <section id="discover" ref={sectionDiscover} className="discover bg-black">
+        <section id="discover" className="discover bg-black">
           <Strokes />
           <h2 className="heading-regular galins animated"><span className="line">Discover the</span><span className="line">City of the Lights</span></h2>
           <p className="paragraphe"><span className="line"><span>We offer many classic but also atypical and original tours</span></span><span className="line"><span>to discover the city and its most charming</span></span><span className="line"><span> places</span></span></p>
@@ -317,8 +327,9 @@ function App() {
             <Box title="Montmartres" illu={visit3} faces={[6, 7, 8]} />
           </div>
         </section>
-        <section id="presentation" ref={sectionPresentation} className="presentation">
+        <section id="presentation" className="presentation">
           <img className="brush" src={brush} alt="" />
+          <Strokes small={true} />
           <div className="inner">
             <div className="illu">
               <div className="hero">
@@ -336,7 +347,7 @@ function App() {
           </div>
           <img className="circle" src={circleBlack} alt="Paris with locals"/>
         </section>
-        <section id="guide" ref={sectionGuide} className="guide">
+        <section id="guide" className="guide">
           <img className="background" src={backgroundGuide} alt="Paris" />
           <img className="circle" src={circleWhite} alt="Paris with locals"/>
           <Strokes />
@@ -348,7 +359,22 @@ function App() {
             </div>
             <div className="illu">
               <div className="hero">
-                <div className="infos" />
+                <div className="infos">
+                  <div className="names">
+                    <div>
+                      <h3 className="title">Anne, <span>23</span></h3>
+                      <p>History Student</p>
+                    </div>
+                    <div>
+                      <h3 className="title">Matthieu, <span>27</span></h3>
+                      <p>Web Designer</p>
+                    </div>
+                  </div>
+                  <nav className="navigation">
+                    <img className="arrow" src={arrow} alt="Suivant"/>
+                    <img className="arrow" src={arrow} alt="Précédent"/>
+                  </nav>
+                </div>
                 <div className="carousel">
                   <div onClick={() => playCarouselGuides(2)} className="slide">
                     <img className="landscape" src={bgGuide1} alt="Rue de Paris" />
@@ -363,7 +389,7 @@ function App() {
             </div>
           </div>
         </section>
-        <section className="h-screen bg-black"></section>
+        <section id="black" className="h-screen bg-black"></section>
       </div>
     </>
   );

@@ -1,8 +1,8 @@
 import './strokes.scss'
 
-const Strokes = ({ dark }) => {
+const Strokes = ({ dark, small }) => {
     return (
-        <div className={`strokes ${dark && 'dark'}`}>
+        <div className={`strokes ${dark ? 'dark' : ''} ${small ? 'small' : ''}`}>
           <div className="stroke" />
           <div className="stroke" />
           <div className="stroke" />
@@ -13,7 +13,8 @@ const Strokes = ({ dark }) => {
 }
 
 Strokes.defaultProps = {
-    dark: false
+    dark: false,
+    small: false
 }
 
 export default Strokes
