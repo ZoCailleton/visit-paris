@@ -25,6 +25,7 @@ import visit1_2 from './images/discover/visit-01-2.jpg'
 import visit1_3 from './images/discover/visit-01-3.jpg'
 import visit2 from './images/discover/visit-02.jpg'
 import visit3 from './images/discover/visit-03.jpg'
+import visit3_2 from './images/discover/visit-03-2.jpg'
 
 import brush from './images/presentation/brush.svg'
 import presentation1 from './images/presentation/presentation-01.jpg'
@@ -33,8 +34,10 @@ import presentation2 from './images/presentation/presentation-02.jpg'
 import backgroundGuide from './images/guide/background.jpg'
 import bgGuide1 from './images/guide/background-01.jpg'
 import bgGuide2 from './images/guide/background-02.jpg'
+import bgGuide3 from './images/guide/background-03.jpg'
 import guide1 from './images/guide/guide-01.png'
 import guide2 from './images/guide/guide-02.png'
+import guide3 from './images/guide/guide-03.png'
 
 import circleBlack from './images/presentation/paris-with-locals-black.svg'
 import circleWhite from './images/presentation/paris-with-locals-white.svg'
@@ -75,7 +78,7 @@ function App() {
         scrollTrigger: {
           start: 'top 30%',
           trigger: section,
-          toggleClass: 'visible',
+          toggleClass: 'visible'
         }
       });
     });
@@ -118,6 +121,12 @@ function App() {
         scrub: true
       }
     })
+    
+    i=0
+    for(let face of document.querySelectorAll('.people div')) {
+      face.style.transitionDelay = `${i*50}ms`
+      i++
+    }
 
     // Heading
     const posLetters = {
@@ -231,7 +240,7 @@ function App() {
         const letters = line.textContent.split('')
         line.innerHTML = ''
         for(let letter of letters) {
-          line.innerHTML += `<span class="letter ${(i > 15 && i < 24 && j === 1) || (i > 18 && i < 22 && j === 2) || (i > 4 && i < 8 && j === 3) ? 'italic' : ''} ${(i > 15 && i < 24 && j === 1) || (i > 20 && i < 26 && j === 3) ? 'beige' : ''} ${letter === ' ' ? 'space' : ''}" style="transition-delay: ${i*15}ms;">${letter}</span>`
+          line.innerHTML += `<span class="letter ${(i > 15 && i < 24 && j === 1) || (i > 19 && i < 27 && j === 2) || (i > 4 && i < 8 && j === 3) ? 'italic' : ''} ${(i > 15 && i < 24 && j === 1) || (i > 20 && i < 26 && j === 3) ? 'beige' : ''} ${letter === ' ' ? 'space' : ''}" style="transition-delay: ${i*15}ms;">${letter}</span>`
           i++
         }
       }
@@ -267,17 +276,35 @@ function App() {
       .to('section.guide .hero .carousel .slide:nth-child(1) .landscape', 1, {marginLeft: 0, ease: Power2.easeInOut}, '-=1')
       .to('section.guide .hero .carousel .slide:nth-child(2) .subject', 1, {marginLeft: 200, ease: Power2.easeInOut}, '-=1')
       .to('section.guide .hero .carousel .slide:nth-child(2) .landscape', 1, {marginLeft: -50, ease: Power2.easeInOut}, '-=1')
+      .to('section.guide .hero .carousel .slide:nth-child(3) .subject', 1, {marginLeft: 200, ease: Power2.easeInOut}, '-=1')
+      .to('section.guide .hero .carousel .slide:nth-child(3) .landscape', 1, {marginLeft: -50, ease: Power2.easeInOut}, '-=1')
       .to('section.guide .hero .infos .names', 1, {y: 0, ease: Power2.easeInOut}, '-=1')
+      .to('section.guide .hero .navigation .next', 1, {opacity: 1, ease: Power2.easeInOut}, '-=1')
+      .to('section.guide .hero .navigation .prev', 1, {opacity: 0.25, ease: Power2.easeInOut}, '-=1')
       
     } else if(to === 2) {
 
       tl
-      .to('section.guide .hero .carousel', 1, {x: '-50%', ease: Power2.easeInOut})
+      .to('section.guide .hero .carousel', 1, {x: '-33.33%', ease: Power2.easeInOut})
       .to('section.guide .hero .carousel .slide:nth-child(1) .subject', 1, {marginLeft: -100, ease: Power2.easeInOut}, '-=1')
       .to('section.guide .hero .carousel .slide:nth-child(1) .landscape', 1, {marginLeft: 50, ease: Power2.easeInOut}, '-=1')
       .to('section.guide .hero .carousel .slide:nth-child(2) .subject', 1, {marginLeft: 0, ease: Power2.easeInOut}, '-=1')
       .to('section.guide .hero .carousel .slide:nth-child(2) .landscape', 1, {marginLeft: 0, ease: Power2.easeInOut}, '-=1')
-      .to('section.guide .hero .infos .names', 1, {y: '-50%', ease: Power2.easeInOut}, '-=1')
+      .to('section.guide .hero .infos .names', 1, {y: '-33.33%', ease: Power2.easeInOut}, '-=1')
+      .to('section.guide .hero .navigation .next', 1, {opacity: 1, ease: Power2.easeInOut}, '-=1')
+      .to('section.guide .hero .navigation .prev', 1, {opacity: 1, ease: Power2.easeInOut}, '-=1')
+
+    } else if(to === 3) {
+
+      tl
+      .to('section.guide .hero .carousel', 1, {x: '-66.66%', ease: Power2.easeInOut})
+      .to('section.guide .hero .carousel .slide:nth-child(2) .subject', 1, {marginLeft: -100, ease: Power2.easeInOut}, '-=1')
+      .to('section.guide .hero .carousel .slide:nth-child(2) .landscape', 1, {marginLeft: 50, ease: Power2.easeInOut}, '-=1')
+      .to('section.guide .hero .carousel .slide:nth-child(3) .subject', 1, {marginLeft: 0, ease: Power2.easeInOut}, '-=1')
+      .to('section.guide .hero .carousel .slide:nth-child(3) .landscape', 1, {marginLeft: 0, ease: Power2.easeInOut}, '-=1')
+      .to('section.guide .hero .infos .names', 1, {y: '-66.66%', ease: Power2.easeInOut}, '-=1')
+      .to('section.guide .hero .navigation .next', 1, {opacity: 0.25, ease: Power2.easeInOut}, '-=1')
+      .to('section.guide .hero .navigation .prev', 1, {opacity: 1, ease: Power2.easeInOut}, '-=1')
 
     }
 
@@ -332,8 +359,8 @@ function App() {
           <p className="paragraphe"><span className="line"><span>We offer many classic but also atypical and original tours</span></span><span className="line"><span>to discover the city and its most charming</span></span><span className="line"><span> places</span></span></p>
           <div className="mt-12 flex justify-center flex-wrap gap-10">
             <Box title="The secrets of Montmartres" illu={visit1} illu2={visit1_2} illu3={visit1_3} faces={[1, 2, 3]} />
-            <Box title="Montmartres" illu={visit2} faces={[4, 5]} bottom={true} />
-            <Box title="Montmartres" illu={visit3} faces={[6, 7, 8]} />
+            <Box title="Private visit of the Louvre" illu={visit2} faces={[4, 5]} bottom={true} />
+            <Box title="In the footsteps of Napoleon" illu={visit3} illu2={visit3_2} faces={[6, 7, 8]} />
           </div>
         </section>
         <section id="presentation" className="presentation">
@@ -349,9 +376,9 @@ function App() {
               </div>
             </div>
             <div>
-              <h2 className="heading-regular galins animated"><span className="line">Discover</span><span className="line">the City of</span><span className="line">the Lights</span></h2>
-              <p className="paragraphe"><span className="line"><span>What better to discover a city than to be</span></span><span className="line"><span>guided by its inhabitants ? Let yourself be</span></span><span className="line"><span>guided and discover the secrets of Paris</span></span><span className="line"><span>while going off the beaten track.</span></span></p>
-              <div className="cta"><div>Book a <span>guide</span></div></div>
+              <h2 className="heading-regular galins animated"><span className="line">Live an</span><span className="line">unforgettable</span><span className="line">journey</span></h2>
+              <p className="paragraphe"><span className="line"><span>A city steeped in history and culture, Paris</span></span><span className="line"><span>has an endless list of monuments and</span></span><span className="line"><span>activities to discover. You will never be bored.</span></span></p>
+              <div className="cta"><div>Discover <span>places</span></div></div>
             </div>
           </div>
           <img className="circle" src={circleBlack} alt="Paris with locals"/>
@@ -363,7 +390,7 @@ function App() {
           <div className="inner">
             <div>
               <h2 className="heading-regular galins animated"><span className="line">Find the</span><span className="line">perfect local</span><span className="line">guide</span></h2>
-              <p className="paragraphe"><span className="line"><span>Lorem ipsum dolor sit amet, consectetur</span></span><span className="line"><span>adipiscing elit. Urna, mauris amet, scelerisque nec</span></span><span className="line"><span>velit quam eget eu volutpat. Amet duis risus odio</span></span><span className="line"><span>hendrerit.</span></span></p>
+              <p className="paragraphe"><span className="line"><span>What better to discover a city than to be guided</span></span><span className="line"><span>by its inhabitants ? Let yourself be surprised</span></span><span className="line"><span>and discover the secrets of Paris while</span></span><span className="line"><span>going off the beaten track.</span></span></p>
               <div className="cta"><div>Book a <span>guide</span></div></div>
             </div>
             <div className="illu">
@@ -378,10 +405,14 @@ function App() {
                       <h3 className="title">Matthieu, <span>27</span></h3>
                       <p>Web Designer</p>
                     </div>
+                    <div>
+                      <h3 className="title">Alex, <span>20</span></h3>
+                      <p>Student</p>
+                    </div>
                   </div>
                   <nav className="navigation">
-                    <img className="arrow" src={arrow} alt="Suivant"/>
-                    <img className="arrow" src={arrow} alt="Précédent"/>
+                    <img className="arrow next" src={arrow} alt="Suivant"/>
+                    <img className="arrow prev" src={arrow} alt="Précédent"/>
                   </nav>
                 </div>
                 <div className="carousel">
@@ -389,9 +420,13 @@ function App() {
                     <img className="landscape" src={bgGuide1} alt="Rue de Paris" />
                     <img className="subject" src={guide1} alt="Femme portant un bérêt rouge" />
                   </div>
-                  <div onClick={() => playCarouselGuides(1)} className="slide">
+                  <div onClick={() => playCarouselGuides(3)} className="slide">
                     <img className="landscape" src={bgGuide2} alt="Rue de Paris" />
                     <img className="subject" src={guide2} alt="Femme portant un bérêt rouge" />
+                  </div>
+                  <div onClick={() => playCarouselGuides(1)} className="slide">
+                    <img className="landscape" src={bgGuide3} alt="Rue de Paris" />
+                    <img className="subject" src={guide3} alt="Femme portant un bérêt rouge" />
                   </div>
                 </div>
               </div>

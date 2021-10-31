@@ -23,16 +23,16 @@ const Header = () => {
 
     let tl = gsap.timeline()
     tl
-    .set('.header-home .layer:nth-child(1)', {y: 500})
-    .set('.header-home .layer:nth-child(2)', {y: 450})
-    .set('.header-home .layer:nth-child(3)', {y: 400})
-    .set('.header-home .layer:nth-child(4)', {y: 350})
-    .set('.header-home .layer:nth-child(5)', {y: 300})
-    .set('.header-home .layer:nth-child(6)', {y: 250})
-    .set('.header-home .layer:nth-child(7)', {y: 200})
-    .set('.header-home .layer:nth-child(8)', {y: 150})
-    .set('.header-home .layer:nth-child(9)', {y: 100})
-    .set('.header-home .leaves', {y: 50})
+    .set('.header-home .layer:nth-child(1)', {scale: 1.05})
+    .set('.header-home .layer:nth-child(2)', {scale: 1.1})
+    .set('.header-home .layer:nth-child(3)', {scale: 1.15})
+    .set('.header-home .layer:nth-child(4)', {scale: 1.18})
+    .set('.header-home .layer:nth-child(5)', {scale: 1.2})
+    .set('.header-home .layer:nth-child(6)', {scale: 1.25})
+    .set('.header-home .layer:nth-child(7)', {scale: 1.3})
+    .set('.header-home .layer:nth-child(8)', {scale: 1.35})
+    .set('.header-home .layer:nth-child(9)', {scale: 1.4})
+    .set('.header-home .leaves', {scale: 1.5})
     .set('.header-home .heading .letter:nth-child(1)', {y: 30, opacity: 0})
     .set('.header-home .heading .letter:nth-child(2)', {y: 50, opacity: 0})
     .set('.header-home .heading .letter:nth-child(3)', {y: 15, opacity: 0})
@@ -45,8 +45,8 @@ const Header = () => {
 
     for(let layer of document.querySelectorAll('.header-home .layer')) {
       gsap.to(layer, {
-        duration: 2,
-        y: 0,
+        duration: 3,
+        scale: 1,
         ease: Power2.easeInOut,
         delay: 4.5
       })

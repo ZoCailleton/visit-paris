@@ -380,7 +380,7 @@ section {
                 color: #fff;
                 overflow: hidden;
                 .names {
-                    height: 200%;
+                    height: 300%;
                     > div {
                         height: 125px;
                         padding: 0 30px;
@@ -391,7 +391,7 @@ section {
                     }
                     .title {
                         font-size: 32px;
-                        font-family: 'Bebas';
+                        font-family: 'Bebas Neue';
                         line-height: 1em;
                         span {
                             color: $beige;
@@ -411,7 +411,7 @@ section {
                     grid-gap: 30px;
                     .arrow {
                         height: 15px;
-                        &:nth-child(2) {
+                        &.prev {
                             transform: rotate(180deg);
                             opacity: 0.5;
                         }
@@ -419,11 +419,11 @@ section {
                 }
             }
             .carousel {
-                width: 200%;
+                width: 300%;
                 height: 100%;
                 display: flex;
                 .slide {
-                    width: 50%;
+                    width: calc(100% / 3);
                     height: 100%;
                     display: flex;
                     align-items: center;
@@ -438,7 +438,8 @@ section {
                             transform: scale(1.1);
                         }
                     }
-                    &:nth-child(2) {
+                    &:nth-child(2),
+                    &:nth-child(3) {
                         .subject {
                             margin-left: 200px;
                         }
