@@ -11,6 +11,8 @@
 body {
     background-color: #111;
     font-family: 'Sofia Pro';
+    overflow-x: hidden;
+    overflow-y: scroll;
 }
 
 .galins {

@@ -25,6 +25,7 @@ import visit1 from './images/discover/visit-01.jpg'
 import visit1_2 from './images/discover/visit-01-2.jpg'
 import visit1_3 from './images/discover/visit-01-3.jpg'
 import visit2 from './images/discover/visit-02.jpg'
+import visit2_2 from './images/discover/visit-02-2.jpg'
 import visit3 from './images/discover/visit-03.jpg'
 import visit3_2 from './images/discover/visit-03-2.jpg'
 
@@ -50,23 +51,31 @@ const Home = () => {
   gsap.registerPlugin(ScrollTrigger)
   gsap.registerPlugin(ScrollToPlugin)
 
-  const [step, setStep] = useState(2)
-
+  const [step, setStep] = useState(0)
+  const [boxes, setBoxes] = useState(false)
+  
   const handlePrev = () => step > 0 ? setStep(step - 1) : setStep(4)
   const handleNext = () => step < 4 ? setStep(step + 1) : setStep(0)
+
+  const handleBoxes = () => {
+    for(let box of document.querySelectorAll('.box-discover')) {
+      boxes ? box.classList.remove('wd') : box.classList.add('wd')
+    }
+    setBoxes(!boxes)
+  }
 
   useEffect(() => {
 
     if(step === 0) {
       gsap.to(window, {duration: 1.5, scrollTo: "#header", ease: Power2.easeInOut});
     } else if(step === 1) {
-      gsap.to(window, {duration: 2, scrollTo: {y: "#discover", offsetY: -100}, ease: Power2.easeInOut});
+      gsap.to(window, {duration: 2.5, scrollTo: {y: "#discover", offsetY: -50}, ease: Power2.easeInOut});
     } else if(step === 2) {
-      gsap.to(window, {duration: 2, scrollTo: {y: "#presentation", offsetY: -100}, ease: Power2.easeInOut});
+      gsap.to(window, {duration: 2.5, scrollTo: {y: "#presentation", offsetY: -50}, ease: Power2.easeInOut});
     } else if(step === 3) {
-      gsap.to(window, {duration: 1.5, scrollTo: "#guide", ease: Power2.easeInOut});
+      gsap.to(window, {duration: 2, scrollTo: {y: "#guide", offsetY: 50}, ease: Power2.easeInOut});
     } else if(step === 4) {
-      gsap.to(window, {duration: 2, scrollTo: "#black", ease: Power2.easeInOut});
+      gsap.to(window, {duration: 2.5, scrollTo: "#black", ease: Power2.easeInOut});
     }
 
   }, [step])
@@ -88,6 +97,7 @@ const Home = () => {
     let i=0;
     for(let layer of document.querySelectorAll('.header-home .container-layer .layer')) {
       i++
+      console.log(400-i*0.5*50)
       gsap.to(layer, {
         top: 400-(i*50),
         ease: Power0.easeNone,
@@ -109,8 +119,8 @@ const Home = () => {
       }
     })
     
-    tl.to(document.querySelectorAll('.header-home .btn:nth-child(1)'), {y: 15, rotate: 2})
-    tl.to(document.querySelectorAll('.header-home .btn:nth-child(2)'), {y: 30, rotate: -2, filter: 'blur(1px)'})
+    tl.to(document.querySelectorAll('.header-home .btn:nth-child(1)'), {duration: 1, y: 15, rotate: 2})
+    tl.to(document.querySelectorAll('.header-home .btn:nth-child(2)'), {duration: 1, y: 30, rotate: -2, filter: 'blur(1px)'}, '-=1')
     
     // Leaves
     gsap.to(document.querySelector('.leaves'), {
@@ -125,7 +135,7 @@ const Home = () => {
     
     i=0
     for(let face of document.querySelectorAll('.people div')) {
-      face.style.transitionDelay = `${i*50}ms`
+      face.style.transitionDelay = `${i*75}ms`
       i++
     }
 
@@ -133,7 +143,7 @@ const Home = () => {
     const posLetters = {
       1: {
         y: 35,
-        rotate: 4
+        rotate: 3
       },
       2: {
         y: 25,
@@ -149,7 +159,7 @@ const Home = () => {
       },
       5: {
         y: 35,
-        rotate: -5
+        rotate: -4
       }
     }
 
@@ -167,19 +177,6 @@ const Home = () => {
       })
       i++
     }
-    
-    tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: 'section.presentation',
-        start: 'top top',
-        bottom: 'bottom top',
-        scrub: true
-      }
-    })
-    
-    tl
-    .to(document.querySelector('section.presentation .hero img'), {y: 50, ease: Power0.easeNone})
-    .to(document.querySelector('section.presentation .mini-hero'), {y: -200, ease: Power0.easeNone}, '-=1')
     
     // Paris with locals
     for(let circle of document.querySelectorAll('.circle')) {
@@ -228,10 +225,10 @@ const Home = () => {
       }
     });
 
-    tl.to(document.querySelector('section.guide .background'), 1, {y: 200, opacity: 0.2, ease: Power0.easeNone});
+    tl.to(document.querySelector('section.guide .background'), {y: 200, opacity: 0.2, ease: Power0.easeNone});
 
-    gsap.to(document.querySelector('.main-nav'), {
-      y: -150,
+    gsap.to(document.querySelector('section.guide .bars .bar:nth-child(1)'), {
+      height: 75,
       ease: Power0.easeNone,
       scrollTrigger: {
         trigger: 'section.guide',
@@ -325,9 +322,12 @@ const Home = () => {
 
   return (
     <>
-      <div className="p-6 flex gap-4 fixed right-0 bottom-0 z-50">
-        <div onClick={handlePrev} className="prev w-16 h-16 bg-gray-400 rounded-full cursor-pointer"></div>
-        <div onClick={handleNext} className="next w-16 h-16 bg-gray-400 rounded-full cursor-pointer"></div>
+      <div className="p-6 fixed right-0 bottom-0 z-50">
+        <div onClick={handleBoxes} className="prev w-full h-16 bg-gray-400 cursor-pointer"></div>
+        <div className="mt-4 flex gap-4">
+          <div onClick={handlePrev} className="prev w-16 h-16 bg-gray-400 rounded-full cursor-pointer"></div>
+          <div onClick={handleNext} className="next w-16 h-16 bg-gray-400 rounded-full cursor-pointer"></div>
+        </div>
       </div>
       <div className="wrapper">
         <Nav />
@@ -369,10 +369,10 @@ const Home = () => {
         <section id="discover" className="discover bg-black">
           <Strokes />
           <h2 className="heading-regular galins animated"><span className="line">Discover the</span><span className="line">City of the Lights</span></h2>
-          <p className="paragraphe"><span className="line"><span>We offer many classic but also atypical and original tours</span></span><span className="line"><span>to discover the city and its most charming</span></span><span className="line"><span> places</span></span></p>
+          <p className="paragraphe"><span className="line"><span>We offer many classic but also atypical and original tours</span></span><span className="line"><span>to discover the city and its most charming</span></span><span className="line"><span> places.</span></span></p>
           <div className="mt-12 flex justify-center flex-wrap gap-10">
             <Box id={1} title="The secrets of Montmartres" illu={visit1} illu2={visit1_2} illu3={visit1_3} faces={[1, 2, 3]} />
-            <Box id={2} title="Private visit of the Louvre" illu={visit2} illu2={visit2} faces={[4, 5]} bottom={true} />
+            <Box id={2} title="Private visit of the Louvre" illu={visit2} illu2={visit2_2} faces={[4, 5]} bottom={true} />
             <Box id={3} title="In the footsteps of Napoleon" illu={visit3} illu2={visit3_2} faces={[6, 7, 8]} />
           </div>
         </section>
@@ -400,6 +400,10 @@ const Home = () => {
           <img className="background" src={backgroundGuide} alt="Paris" />
           <img className="circle" src={circleWhite} alt="Paris with locals"/>
           <Strokes />
+          <div className="bars w-full flex absolute left-0">
+            <div className="bar"/>
+            <div className="bar"/>
+          </div>
           <div className="inner">
             <div>
               <h2 className="heading-regular galins animated"><span className="line">Find the</span><span className="line">perfect local</span><span className="line">guide</span></h2>

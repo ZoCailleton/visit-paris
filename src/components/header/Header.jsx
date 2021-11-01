@@ -85,10 +85,10 @@ const Header = () => {
   }, [])
 
   return (
-    <div style={{ overflow: 'hidden' }} className="wrapper">
+    <div className="wrapper">
       <Nav />
       <Loader />
-      <header id="header" className="header-home">
+      <header style={{ overflow: 'hidden' }} id="header" className="header-home">
         <img className="layer leaves" src={leaves} alt="Photo de Paris" />
         <div className="container-layer">
           <img className="layer" src={layer1} alt="Photo de Paris" />
