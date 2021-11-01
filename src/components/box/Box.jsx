@@ -11,7 +11,7 @@ import user6 from '../../images/users/user-06.jpg'
 import user7 from '../../images/users/user-07.jpg'
 import arrow from '../../images/icons/arrow.svg'
 
-const Box = ({ title, illu, illu2, illu3, faces, bottom }) => {
+const Box = ({ id, title, illu, illu2, illu3, faces, bottom }) => {
 
     const [visibleIllu, setVisibleIllu] = useState(1)
 
@@ -55,12 +55,12 @@ const Box = ({ title, illu, illu2, illu3, faces, bottom }) => {
                             <img className="see-more" src={arrow} alt="Voir plus" />
                         </div>
                     </div>
-                    <div style={{ transform: 'translateX(-'+(visibleIllu-1)*(100/3)+'%)' }} className={`carousel`}>
+                    <div style={{ transform: `translate${id === 2 ? 'Y' : 'X'}(-${(visibleIllu-1)*(100/3)}%)` }} className={`carousel ${id === 2 ? 'y' : ''}`}>
                         <div>
-                            <img style={{ marginLeft: visibleIllu === 1 ? 0 : 100 }} className="transition" src={illu} alt="Lieu emblématique de Paris" />
+                            <img style={{ marginLeft: visibleIllu === 1 ? 0 : id === 2 ? 0 : 100, marginTop: visibleIllu === 1 ? 0 : id === 2 ? 100 : 0 }} className="transition" src={illu} alt="Lieu emblématique de Paris" />
                         </div>
                         <div>
-                            <img style={{ marginLeft: visibleIllu === 2 ? 0 : visibleIllu === 3 ? 100 : -100 }}className="transition" src={illu2} alt="Lieu emblématique de Paris" />
+                            <img style={{ marginLeft: visibleIllu === 2 ? 0 : visibleIllu === 3 ? id === 2 ? 0 : 100 : id === 2 ? 0 : -100, marginTop: visibleIllu === 2 ? 0 : id === 2 ? -100 : 0 }}className="transition" src={illu2} alt="Lieu emblématique de Paris" />
                         </div>
                         <div>
                             <img style={{ marginLeft: visibleIllu === 3 ? 0 : -100 }}  className="transition" src={illu3} alt="Lieu emblématique de Paris" />
